@@ -7,6 +7,8 @@ TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES = project.v
 
+PROJECT_SOURCES += alu.v bus_mux.v control.v core.v cpu_access.v datapath.v debugger_apb.v debugger_microcode.v full_adder.v i2c_slave.v i2c_to_apb.v microcode.v pc.v ram.v register.v status_reg.v streams1_to_apb.v streams4_to_apb.v
+
 ifneq ($(GATES),yes)
 
 # RTL simulation:
@@ -32,7 +34,7 @@ VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
 endif
 
 # Include the testbench sources:
-VERILOG_SOURCES += $(PWD)/tb.v 
+VERILOG_SOURCES += $(PWD)/tb.v
 TOPLEVEL = tb
 
 # MODULE is the basename of the Python test file

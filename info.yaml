@@ -16,6 +16,24 @@ project:
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
     - "project.v"
+    - "alu.v"
+    - "bus_mux.v"
+    - "control.v"
+    - "core.v"
+    - "cpu_access.v"
+    - "datapath.v"
+    - "debugger_apb.v"
+    - "debugger_microcode.v"
+    - "full_adder.v"
+    - "i2c_slave.v"
+    - "i2c_to_apb.v"
+    - "microcode.v"
+    - "pc.v"
+    - "ram.v"
+    - "register.v"
+    - "status_reg.v"
+    - "streams1_to_apb.v"
+    - "streams4_to_apb.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
