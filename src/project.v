@@ -16,84 +16,35 @@ module tt_um_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = 8'b0;  // Example: ou_out is the difference of ui_in and uio_in
+  wire [17:0] outputs;
+  microcode mc(
+    .OPCODE(ui_in[7:4]),
+    .FLAGS(ui_in[3:2]),
+    .STEP(ui_in[1:0]),
 
-  reg [7:0] in0, in1;
-  always @(posedge clk)
-    begin
-      if (~rst_n)
-        begin
-          in0 <= 8'b0;
-          in1 <= 8'b0;
-        end
-      else
-        begin
-          in0 <= ui_in;
-          in1 <= in0;
-        end
-    end
+    .HLT(outputs[17]),
+    .CE(outputs[16]),
+    .SU(outputs[15]),
+    .AIn(outputs[14]),
+    .BIn(outputs[13]),
+    .OIn(outputs[12]),
+    .IIn(outputs[11]),
+    .Jn(outputs[10]),
+    .FIn(outputs[9]),
+    .MIn(outputs[8]),
+    .RI(outputs[7]),
 
-  wire scl_i;
-  wire scl_o;
-  wire scl_t;
-  wire sda_i;
-  wire sda_o;
-  wire sda_t;
-
-  wire psel;
-  wire [7:0] paddr;
-  wire penable;
-  wire pwrite;
-  wire [7:0] pwdata;
-  wire [7:0] prdata;
-  wire pready;
-  i2c_to_apb adapter(
-    .CLK(clk),
-    .RESETn(rst_n),
-
-    .scl_i(scl_i),
-    .scl_o(scl_o),
-    .scl_t(scl_t),
-    .sda_i(sda_i),
-    .sda_o(sda_o),
-    .sda_t(sda_t),
-
-    .device_address(7'd42),
-    .device_address_mask(7'h7F),
-
-    .PSEL(psel),
-    .PADDR(paddr),
-    .PENABLE(penable),
-    .PWRITE(pwrite),
-    .PWDATA(pwdata),
-    .PRDATA(prdata),
-    .PREADY(pready)
+    .AOn(outputs[6]),
+    .BOn(outputs[5]),
+    .IOn(outputs[4]),
+    .COn(outputs[3]),
+    .EOn(outputs[2]),
+    .ROn(outputs[1]),
+    .NOn(outputs[0])
   );
 
-  debugger_apb debugger(
-    .PCLK(clk),
-    .PRESETn(rst_n),
-    .PSEL(psel),
-    .PADDR(paddr),
-    .PENABLE(penable),
-    .PWRITE(pwrite),
-    .PWDATA(pwdata),
-    .PRDATA(prdata),
-    .PREADY(pready),
-    .INREG(in1)
-  );
-
-  assign scl_i = uio_in[2];
-  assign sda_i = uio_in[3];
-  assign uio_out[2] = scl_o;
-  assign uio_out[3] = sda_o;
-  assign uio_oe[2]  = scl_t;
-  assign uio_oe[3]  = sda_t;
-
-  assign uio_out[1:0] = 2'b0;
-  assign uio_out[7:4] = 4'b0;
-  assign uio_oe[1:0]  = 2'b0;
-  assign uio_oe[7:4]  = 4'b0;
+  assign uo_out[7:0]  = outputs[7:0];
+  assign uio_out[7:0] = outputs[15:8];
+  assign uio_oe[7:0]  = 8'b1;
 
 endmodule
