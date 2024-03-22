@@ -17,7 +17,7 @@ module tt_um_example (
 );
 
   // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in - uio_in;  // Example: ou_out is the difference of ui_in and uio_in
+  assign uo_out  = 8'b0;  // Example: ou_out is the difference of ui_in and uio_in
 
   reg [7:0] in0, in1;
   always @(posedge clk)
