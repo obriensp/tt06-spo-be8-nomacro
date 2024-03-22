@@ -90,5 +90,6 @@ module streams1_to_apb(
   );
 
   assign in_ready = apb_in_ready | ~got_first_byte;
+  assign out_last = 1'b0;
 
 endmodule
