@@ -5,7 +5,7 @@
 
 `define default_netname none
 
-module tt_um_microcode (
+module tt_um_core (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -15,36 +15,62 @@ module tt_um_microcode (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
+  // module core(
+  //   input wire        CLK,
+  //   input wire        RESETn,
+  //
+  //   input wire        DEBUG_REQUEST,
+  //   output wire       DEBUG_ACK,
+  //   input wire  [7:0] DEBUG_DATA,
+  //   input wire        D_CLR, D_HLT, D_CE, D_SU,
+  //   input wire        D_AIn, D_BIn, D_OIn, D_IIn, D_Jn, D_FIn, D_MIn, D_RI,
+  //   input wire        D_DOn, D_AOn, D_BOn, D_IOn, D_COn, D_EOn, D_ROn, D_NOn,
+  //
+  //   output wire [7:0] BUS,
+  //   input wire  [7:0] INREG,
+  //   output wire [7:0] OUTREG,
+  //   output wire       HALTED
+  // )
 
-  wire [17:0] outputs;
-  microcode mc(
-    .OPCODE(ui_in[7:4]),
-    .FLAGS(ui_in[3:2]),
-    .STEP(ui_in[1:0]),
+  wire debug_ack;
+  wire [7:0] bus;
+  core u_core(
+    .CLK(clk),
+    .RESETn(rst_n),
 
-    .HLT(outputs[17]),
-    .CE(outputs[16]),
-    .SU(outputs[15]),
-    .AIn(outputs[14]),
-    .BIn(outputs[13]),
-    .OIn(outputs[12]),
-    .IIn(outputs[11]),
-    .Jn(outputs[10]),
-    .FIn(outputs[9]),
-    .MIn(outputs[8]),
-    .RI(outputs[7]),
+    .DEBUG_REQUEST(1'b0),
+    .DEBUG_ACK(debug_ack),
+    .DEBUG_DATA(8'b0),
 
-    .AOn(outputs[6]),
-    .BOn(outputs[5]),
-    .IOn(outputs[4]),
-    .COn(outputs[3]),
-    .EOn(outputs[2]),
-    .ROn(outputs[1]),
-    .NOn(outputs[0])
+    .D_CLR(1'b0),
+    .D_HLT(1'b0),
+    .D_CE(1'b0),
+    .D_SU(1'b0),
+    .D_AIn(1'b0),
+    .D_BIn(1'b0),
+    .D_OIn(1'b0),
+    .D_IIn(1'b0),
+    .D_Jn(1'b0),
+    .D_FIn(1'b0),
+    .D_MIn(1'b0),
+    .D_RI(1'b0),
+    .D_DOn(1'b0),
+    .D_AOn(1'b0),
+    .D_BOn(1'b0),
+    .D_IOn(1'b0),
+    .D_COn(1'b0),
+    .D_EOn(1'b0),
+    .D_ROn(1'b0),
+    .D_NOn(1'b0),
+
+    .BUS(bus),
+    .INREG(ui_in),
+    .OUTREG(uo_out),
+    .HALTED(uio_out[0])
   );
 
-  assign uo_out[7:0]  = outputs[7:0];
-  assign uio_out[7:0] = outputs[15:8];
-  assign uio_oe[7:0]  = 8'b1;
+  assign uio_out[7:1] = 7'b0;
+  assign uio_oe[0] = 1'b1;
+  assign uio_oe[7:1] = 7'b0;
 
 endmodule
