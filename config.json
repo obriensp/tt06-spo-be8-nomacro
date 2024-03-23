@@ -1,0 +1,65 @@
+{
+  "DESIGN_NAME": "tt_um_ram8_macro",
+  "VERILOG_FILES": ["src/project.v"],
+  "EXTRA_VERILOG_MODELS": ["src/RAM8.v"],
+
+  "FP_PDN_CHECK_NODES": false,
+
+  "MAGIC_LEF_WRITE_USE_GDS": true,
+
+  "MACROS": {
+    "RAM8": {
+      "instances": {
+        "u_ram": {
+          "location": [10, 10],
+          "orientation": "N"
+        }
+      },
+      "gds": ["dir::macros/RAM8.gds"],
+      "lef": ["dir::macros/RAM8.lef"],
+      "nl": ["dir::macros/RAM8.nl.v"],
+      "spef": {
+        "min_*": ["dir::macros/RAM8.min_.spef"],
+        "nom_*": ["dir::macros/RAM8.nom_.spef"],
+        "max_*": ["dir::macros/RAM8.max_.spef"]
+      },
+      "lib": {
+        "min_tt_025C_1v80": "dir::macros/RAM8.lib/min_tt_025C_1v80/RAM8__min_tt_025C_1v80.lib",
+        "min_ff_n40C_1v95": "dir::macros/RAM8.lib/min_ff_n40C_1v95/RAM8__min_ff_n40C_1v95.lib",
+        "max_ff_n40C_1v95": "dir::macros/RAM8.lib/max_ff_n40C_1v95/RAM8__max_ff_n40C_1v95.lib",
+        "nom_tt_025C_1v80": "dir::macros/RAM8.lib/nom_tt_025C_1v80/RAM8__nom_tt_025C_1v80.lib",
+        "min_ss_100C_1v60": "dir::macros/RAM8.lib/min_ss_100C_1v60/RAM8__min_ss_100C_1v60.lib",
+        "max_ss_100C_1v60": "dir::macros/RAM8.lib/max_ss_100C_1v60/RAM8__max_ss_100C_1v60.lib",
+        "max_tt_025C_1v80": "dir::macros/RAM8.lib/max_tt_025C_1v80/RAM8__max_tt_025C_1v80.lib",
+        "nom_ss_100C_1v60": "dir::macros/RAM8.lib/nom_ss_100C_1v60/RAM8__nom_ss_100C_1v60.lib",
+        "nom_ff_n40C_1v95": "dir::macros/RAM8.lib/nom_ff_n40C_1v95/RAM8__nom_ff_n40C_1v95.lib"
+      }
+    }
+  },
+
+  "FP_SIZING": "absolute",
+
+
+  "//": "use alternative efabless decap cells to solve LI density issue",
+  "DECAP_CELL": [
+    "sky130_fd_sc_hd__decap_3",
+    "sky130_fd_sc_hd__decap_4",
+    "sky130_fd_sc_hd__decap_6",
+    "sky130_fd_sc_hd__decap_8",
+    "sky130_ef_sc_hd__decap_12"
+  ],
+
+  "//": "period is in ns, so 20ns == 50mHz",
+  "CLOCK_PERIOD": 20,
+  "CLOCK_PORT": "clk",
+
+  "//": "don't use power rings or met5",
+  "DESIGN_IS_CORE": false,
+  "RT_MAX_LAYER": "met4",
+
+  "//": "reduce wasted space",
+  "TOP_MARGIN_MULT": 1,
+  "BOTTOM_MARGIN_MULT": 1,
+  "LEFT_MARGIN_MULT": 6,
+  "RIGHT_MARGIN_MULT": 6
+}
