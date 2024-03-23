@@ -13,14 +13,14 @@ tt_um_example 24,669.82
     core 14,605.034
       control
         microcode 1,532.748
-      datapath 13745.436
-        register
-        register
-        register
-        register
+      datapath 13,745.436
+        register 1,734.266
+        register 1,734.266
+        register 1,734.266
+        register 1,734.266
         pc
         alu
           full_adder
-        register
+        register 1,734.266
         ram 10,669.024
         bus_mux
