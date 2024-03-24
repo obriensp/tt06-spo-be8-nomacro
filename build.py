@@ -33,7 +33,7 @@ class CustomPower(OdbpyStep):
 
 	def get_command(self) -> List[str]:
 		macro = self.config["MACROS"]['RAM8']
-		instance = macro.instances['u_ram.bank0']
+		instance = macro.instances['u_core.datapath.ram.bank0']
 		return super().get_command() + [
 			"--macro-x-pos",
 			instance.location[0],

@@ -4,6 +4,10 @@
 `timescale 1ns/1ns
 
 module RAM8(
+`ifdef USE_POWER_PINS
+  input wire        VPWR,
+  input wire        VGND,
+`endif
   input CLK,
   input EN0,
   input WE0,

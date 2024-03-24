@@ -2,6 +2,11 @@
 `timescale 1ns/1ns
 
 module ram(
+`ifdef USE_POWER_PINS
+  input wire        VPWR,
+  input wire        VGND,
+`endif
+
   input wire CLK,
   input wire RESETn,
 
@@ -18,6 +23,10 @@ module ram(
   wire RAM1_EN =  ADDR[3];
 
   RAM8 bank0(
+`ifdef USE_POWER_PINS
+    .VPWR(VPWR),
+    .VGND(VGND),
+`endif
     .CLK(CLK),
     .EN0(RESETn & RAM0_EN),
     .WE0(RI),
@@ -27,6 +36,10 @@ module ram(
   );
 
   RAM8 bank1(
+`ifdef USE_POWER_PINS
+    .VPWR(VPWR),
+    .VGND(VGND),
+`endif
     .CLK(CLK),
     .EN0(RESETn & RAM1_EN),
     .WE0(RI),

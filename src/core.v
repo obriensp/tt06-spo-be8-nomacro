@@ -2,6 +2,10 @@
 `timescale 1ns/1ns
 
 module core(
+`ifdef USE_POWER_PINS
+  input wire        VPWR,
+  input wire        VGND,
+`endif
   input wire        CLK,
   input wire        RESETn,
 
@@ -73,6 +77,10 @@ module core(
   wire AIn, BIn, OIn, IIn, Jn, FIn, MIn, RI;
   wire DOn, AOn, BOn, IOn, COn, EOn, ROn, NOn;
   datapath datapath(
+`ifdef USE_POWER_PINS
+    .VPWR(VPWR),
+    .VGND(VGND),
+`endif
     .CLK(CLK),
     .RESETn(RESETn),
 
