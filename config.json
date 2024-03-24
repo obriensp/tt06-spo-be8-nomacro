@@ -4,14 +4,14 @@
   "EXTRA_VERILOG_MODELS": ["src/RAM8.v"],
 
   "FP_PDN_CHECK_NODES": false,
-
+  "FP_PDN_CFG": "pdn_cfg.tcl",
   "MAGIC_LEF_WRITE_USE_GDS": true,
 
   "MACROS": {
     "RAM8": {
       "instances": {
         "u_ram": {
-          "location": [10, 10],
+          "location": [0, 10],
           "orientation": "N"
         }
       },
