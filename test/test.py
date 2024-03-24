@@ -7,7 +7,7 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
 async def write_and_verify(dut, string):
-  assert len(string) == 8
+  assert len(string) == 16
 
   # write string
   dut.WE.value = 1
@@ -43,5 +43,4 @@ async def test_ram8(dut):
 
   dut._log.info("Test")
 
-  await write_and_verify(dut, b'Hello, w')
-  await write_and_verify(dut, b'orld!\r\n\0')
+  await write_and_verify(dut, b'Hello, world!\r\n\0')

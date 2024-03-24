@@ -11,17 +11,30 @@ module ram(
   input wire RI
 );
 
-  reg [7:0] memory[15:0];
+  wire [7:0] out0;
+  wire [7:0] out1;
 
-  always @(posedge CLK)
-    begin
-      if (~RESETn)
-        begin
-        end
-      else if (RI)
-        memory[ADDR] <= DIN;
-    end
+  wire RAM0_EN = ~ADDR[3];
+  wire RAM1_EN =  ADDR[3];
 
-  assign DOUT = RI ? 8'b0 : memory[ADDR];
+  RAM8 bank0(
+    .CLK(CLK),
+    .EN0(RESETn & RAM0_EN),
+    .WE0(RI),
+    .A0(ADDR[2:0]),
+    .Di0(DIN),
+    .Do0(out0)
+  );
+
+  RAM8 bank1(
+    .CLK(CLK),
+    .EN0(RESETn & RAM1_EN),
+    .WE0(RI),
+    .A0(ADDR[2:0]),
+    .Di0(DIN),
+    .Do0(out1)
+  );
+
+  assign DOUT  = RAM0_EN ? out0 : out1;
 
 endmodule
