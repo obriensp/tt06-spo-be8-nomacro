@@ -12,6 +12,10 @@
       "instances": {
         "u_ram0": {
           "location": [0, 5],
+          "orientation": "FS"
+        },
+        "u_ram1": {
+          "location": [0, 36],
           "orientation": "N"
         }
       },

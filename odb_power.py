@@ -34,7 +34,7 @@ def power(reader, macro_x_pos: int):
   vgnd_bpin = vgnd_bterm.getBPins()[0]
 
   ymin = 10000
-  ymax = ymin + 30000
+  ymax = ymin + 90000
 
   for i in range(1):
     x = macro_x_pos * 1000 + 18280 + i * 153600
