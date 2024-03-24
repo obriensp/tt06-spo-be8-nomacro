@@ -23,7 +23,7 @@ module tb ();
   wire [7:0] uio_oe;
 
   reg WE;
-  reg [2:0] ADDR;
+  reg [3:0] ADDR;
   reg [7:0] DIN;
   reg [7:0] DOUT;
 
@@ -49,7 +49,7 @@ module tb ();
 
       .ui_in  (DIN),    // Dedicated inputs
       .uo_out (DOUT),   // Dedicated outputs
-      .uio_in ({4'b0, WE, ADDR}),   // IOs: Input path
+      .uio_in ({3'b0, WE, ADDR}),   // IOs: Input path
       .uio_out(uio_out),  // IOs: Output path
       .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)
       .ena    (ena),      // enable - goes high when design is selected

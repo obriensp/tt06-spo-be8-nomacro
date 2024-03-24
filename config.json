@@ -10,7 +10,7 @@
   "MACROS": {
     "RAM8": {
       "instances": {
-        "u_ram": {
+        "u_ram0": {
           "location": [0, 5],
           "orientation": "N"
         }

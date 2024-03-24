@@ -16,15 +16,33 @@ module tt_um_ram8_macro (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  RAM8 u_ram(
+  wire [3:0] ADDR = uio_in[3:0];
+  wire WE         = uio_in[4];
+  wire [7:0] out0;
+  wire [7:0] out1;
+
+  wire RAM0_EN = ~ADDR[3];
+  wire RAM1_EN =  ADDR[3];
+
+  RAM8 u_ram0(
     .CLK(clk),
-    .EN0(rst_n),
-    .WE0(uio_in[3]),
-    .A0(uio_in[2:0]),
+    .EN0(rst_n & RAM0_EN),
+    .WE0(WE),
+    .A0(ADDR[2:0]),
     .Di0(ui_in),
-    .Do0(uo_out)
+    .Do0(out0)
   );
 
+  RAM8 u_ram1(
+    .CLK(clk),
+    .EN0(rst_n & RAM1_EN),
+    .WE0(WE),
+    .A0(ADDR[2:0]),
+    .Di0(ui_in),
+    .Do0(out1)
+  );
+
+  assign uo_out  = RAM0_EN ? out0 : out1;
   assign uio_out = 8'b0;
   assign uio_oe  = 8'b0;
 
