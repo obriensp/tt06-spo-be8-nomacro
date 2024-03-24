@@ -6,8 +6,25 @@ from cocotb.binary import BinaryRepresentation, BinaryValue
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
+async def write_and_verify(dut, string):
+  assert len(string) == 8
+
+  # write string
+  dut.WE.value = 1
+  for i, c in enumerate(string):
+      dut.ADDR.value = i
+      dut.DIN.value = c
+      await ClockCycles(dut.clk, 1)
+
+  # verify string
+  dut.WE.value = 0
+  for i, c in enumerate(string):
+      dut.ADDR.value = i
+      await ClockCycles(dut.clk, 1)
+      assert dut.DOUT.value == c
+
 @cocotb.test()
-async def test_adder(dut):
+async def test_ram8(dut):
   dut._log.info("Start")
 
   # Our example module doesn't use clock and reset, but we show how to use them here anyway.
@@ -17,17 +34,14 @@ async def test_adder(dut):
   # Reset
   dut._log.info("Reset")
   dut.ena.value = 1
-  dut.ui_in.value = 0
-  dut.uio_in.value = 0
+  dut.ADDR.value = 0
+  dut.DIN.value = 0
+  dut.WE.value = 0
   dut.rst_n.value = 0
   await ClockCycles(dut.clk, 10)
   dut.rst_n.value = 1
 
-  # Set the input values, wait one clock cycle, and check the output
   dut._log.info("Test")
-  dut.ui_in.value = 20
-  dut.uio_in.value = 30
 
-  await ClockCycles(dut.clk, 1)
-
-  assert dut.uo_out.value.signed_integer == 0
+  await write_and_verify(dut, b'Hello, w')
+  await write_and_verify(dut, b'orld!\r\n\0')
