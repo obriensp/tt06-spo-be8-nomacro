@@ -20,25 +20,26 @@ module debugger_apb(
   input wire   [7:0] INREG
 );
 
-  wire [1:0] selected_device;
-  address_decoder decode(
-    .PADDR(PADDR),
-    .SEL(selected_device)
-  );
+  // wire [1:0] selected_device;
+  // address_decoder decode(
+  //   .PADDR(PADDR),
+  //   .SEL(selected_device)
+  // );
+  wire selected_device = PADDR != 5'b0;
 
-  wire [7:0] id_rdata;
-  wire id_ready;
-  hardware_id id(
-    .PCLK(PCLK),
-    .PRESETn(PRESETn),
-    .PSEL(selected_device == 2'b10),
-    .PADDR(PADDR),
-    .PENABLE(PENABLE),
-    .PWRITE(PWRITE),
-    .PWDATA(PWDATA),
-    .PRDATA(id_rdata),
-    .PREADY(id_ready)
-  );
+  // wire [7:0] id_rdata;
+  // wire id_ready;
+  // hardware_id id(
+  //   .PCLK(PCLK),
+  //   .PRESETn(PRESETn),
+  //   .PSEL(selected_device == 2'b10),
+  //   .PADDR(PADDR),
+  //   .PENABLE(PENABLE),
+  //   .PWRITE(PWRITE),
+  //   .PWDATA(PWDATA),
+  //   .PRDATA(id_rdata),
+  //   .PREADY(id_ready)
+  // );
 
   wire reset_request;
   wire [7:0] status_rdata;
@@ -105,13 +106,13 @@ module debugger_apb(
     .PREADY0(status_ready),
 
     .PRDATA1(cpu_rdata),
-    .PREADY1(cpu_ready),
+    .PREADY1(cpu_ready)
 
-    .PRDATA2(id_rdata),
-    .PREADY2(id_ready),
-
-    .PRDATA3(8'b0),
-    .PREADY3(1'b1)
+//     .PRDATA2(id_rdata),
+//     .PREADY2(id_ready),
+//
+//     .PRDATA3(8'b0),
+//     .PREADY3(1'b1)
   );
 
   wire       DEBUG_REQUEST;
@@ -190,13 +191,13 @@ module apb_mux(
   input wire        PREADY0,
 
   input wire  [7:0] PRDATA1,
-  input wire        PREADY1,
+  input wire        PREADY1
 
-  input wire  [7:0] PRDATA2,
-  input wire        PREADY2,
-
-  input wire  [7:0] PRDATA3,
-  input wire        PREADY3
+//   input wire  [7:0] PRDATA2,
+//   input wire        PREADY2,
+//
+//   input wire  [7:0] PRDATA3,
+//   input wire        PREADY3
 );
 
   always @(*)
@@ -206,21 +207,21 @@ module apb_mux(
           PRDATA <= PRDATA0;
           PREADY <= PREADY0;
         end
-      else if (SEL == 2'b01)
+      else //if (SEL == 2'b01)
         begin
           PRDATA <= PRDATA1;
           PREADY <= PREADY1;
         end
-      else if (SEL == 2'b10)
-        begin
-          PRDATA <= PRDATA2;
-          PREADY <= PREADY2;
-        end
-      else // if (SEL == 2'b11)
-        begin
-          PRDATA <= PRDATA3;
-          PREADY <= PREADY3;
-        end
+      // else if (SEL == 2'b10)
+      //   begin
+      //     PRDATA <= PRDATA2;
+      //     PREADY <= PREADY2;
+      //   end
+      // else // if (SEL == 2'b11)
+      //   begin
+      //     PRDATA <= PRDATA3;
+      //     PREADY <= PREADY3;
+      //   end
     end
 
 endmodule

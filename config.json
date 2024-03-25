@@ -1,6 +1,6 @@
 {
   "DESIGN_NAME": "tt_um_ram8_macro",
-  "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/status_reg.v", "src/streams1_to_apb.v", "src/streams4_to_apb.v"],
+  "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/register4.v", "src/status_reg.v", "src/streams1_to_apb.v", "src/streams4_to_apb.v"],
   "EXTRA_VERILOG_MODELS": ["src/RAM8.v"],
 
   "FP_PDN_CHECK_NODES": false,

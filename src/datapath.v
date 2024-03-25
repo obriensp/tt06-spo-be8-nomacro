@@ -61,9 +61,8 @@ module datapath(
   );
 
   // Memory address
-  wire [3:0] xADDR_HIGH; // ignoring the top 4 bits of the address register
   wire [3:0] ADDR;
-  register address_register(CLK, RESETn, CLR, {4'b0, BUS[3:0]}, {xADDR_HIGH, ADDR}, MIn);
+  register4 address_register(CLK, RESETn, CLR, BUS[3:0], ADDR, MIn);
 
   // RAM
   wire [7:0] RAM_OUT;
