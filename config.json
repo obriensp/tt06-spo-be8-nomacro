@@ -5,7 +5,10 @@
 
   "FP_PDN_CHECK_NODES": false,
   "FP_PDN_CFG": "pdn_cfg.tcl",
-
+  "FP_PDN_HORIZONTAL_HALO": 0,
+  "FP_PDN_VERTICAL_HALO": 0,
+  "FP_MACRO_VERTICAL_HALO": 0,
+  "FP_MACRO_HORIZONTAL_HALO": 0,
   "MAGIC_LEF_WRITE_USE_GDS": true,
 
   "MACROS": {
@@ -56,8 +59,10 @@
   ],
 
   "//": "period is in ns, so 20ns == 50mHz",
-  "CLOCK_PERIOD": 1000,
+  "CLOCK_PERIOD": 20,
   "CLOCK_PORT": "clk",
+
+  "STA_MACRO_PRIORITIZE_NL": false,
 
   "//": "don't use power rings or met5",
   "DESIGN_IS_CORE": false,

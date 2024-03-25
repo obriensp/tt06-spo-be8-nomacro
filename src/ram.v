@@ -28,7 +28,7 @@ module ram(
     .VGND(VGND),
 `endif
     .CLK(CLK),
-    .EN0(RESETn & RAM0_EN),
+    .EN0(RAM0_EN),
     .WE0(RI),
     .A0(ADDR[2:0]),
     .Di0(DIN),
@@ -41,13 +41,13 @@ module ram(
     .VGND(VGND),
 `endif
     .CLK(CLK),
-    .EN0(RESETn & RAM1_EN),
+    .EN0(RAM1_EN),
     .WE0(RI),
     .A0(ADDR[2:0]),
     .Di0(DIN),
     .Do0(out1)
   );
 
-  assign DOUT  = RAM0_EN ? out0 : out1;
+  assign DOUT = RI ? 8'b0 : (RAM0_EN ? out0 : out1);
 
 endmodule
