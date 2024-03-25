@@ -13,11 +13,11 @@ module streams4_to_apb(
   output wire        out_valid,
   input wire         out_ready,
 
-  input wire   [7:0] base_address,
+  input wire   [4:0] base_address,
   input wire         latch_address,
 
   output wire        PSEL,
-  output wire  [7:0] PADDR,
+  output wire  [4:0] PADDR,
   output wire        PENABLE,
   output wire        PWRITE,
   output wire  [7:0] PWDATA,
@@ -25,11 +25,11 @@ module streams4_to_apb(
   input wire         PREADY
 );
 
-  reg [7:0] current_address;
+  reg [4:0] current_address;
   always @(posedge CLK)
     begin
       if (~RESETn)
-        current_address <= 8'b0;
+        current_address <= 5'b0;
       else if (latch_address & bus_is_idle)
         current_address <= base_address;
       else if (bus_is_completing)

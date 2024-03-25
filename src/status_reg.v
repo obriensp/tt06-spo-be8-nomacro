@@ -6,7 +6,7 @@ module status_reg(
   input wire         PRESETn,
 
   input wire         PSEL,
-  input wire   [7:0] PADDR,
+  input wire   [4:0] PADDR,
   input wire         PENABLE,
   input wire         PWRITE,
   input wire   [7:0] PWDATA,

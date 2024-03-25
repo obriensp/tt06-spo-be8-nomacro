@@ -19,51 +19,88 @@ module tt_um_ram8_macro (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
+  // All output pins must be assigned. If not used, assign to 0.
+assign uo_out  = ui_in - uio_in;  // Example: ou_out is the difference of ui_in and uio_in
 
-  wire debug_ack;
-  wire [7:0] bus;
-  core u_core(
+reg [7:0] in0, in1;
+always @(posedge clk)
+  begin
+    if (~rst_n)
+      begin
+        in0 <= 8'b0;
+        in1 <= 8'b0;
+      end
+    else
+      begin
+        in0 <= ui_in;
+        in1 <= in0;
+      end
+  end
+
+wire scl_i;
+wire scl_o;
+wire scl_t;
+wire sda_i;
+wire sda_o;
+wire sda_t;
+
+wire psel;
+wire [7:0] paddr;
+wire penable;
+wire pwrite;
+wire [7:0] pwdata;
+wire [7:0] prdata;
+wire pready;
+i2c_to_apb adapter(
+  .CLK(clk),
+  .RESETn(rst_n),
+
+  .scl_i(scl_i),
+  .scl_o(scl_o),
+  .scl_t(scl_t),
+  .sda_i(sda_i),
+  .sda_o(sda_o),
+  .sda_t(sda_t),
+
+  .device_address(7'd42),
+  .device_address_mask(7'h7F),
+
+  .PSEL(psel),
+  .PADDR(paddr),
+  .PENABLE(penable),
+  .PWRITE(pwrite),
+  .PWDATA(pwdata),
+  .PRDATA(prdata),
+  .PREADY(pready)
+);
+
+debugger_apb debugger(
 `ifdef USE_POWER_PINS
-    .VPWR(VPWR),
-    .VGND(VGND),
+  .VPWR(VPWR),
+  .VGND(VGND),
 `endif
+  .PCLK(clk),
+  .PRESETn(rst_n),
+  .PSEL(psel),
+  .PADDR(paddr),
+  .PENABLE(penable),
+  .PWRITE(pwrite),
+  .PWDATA(pwdata),
+  .PRDATA(prdata),
+  .PREADY(pready),
+  .INREG(in1)
+);
 
-    .CLK(clk),
-    .RESETn(rst_n),
+assign scl_i = uio_in[2];
+assign sda_i = uio_in[3];
+assign uio_out[2] = scl_o;
+assign uio_out[3] = sda_o;
+assign uio_oe[2]  = scl_t;
+assign uio_oe[3]  = sda_t;
 
-    .DEBUG_REQUEST(1'b0),
-    .DEBUG_ACK(debug_ack),
-    .DEBUG_DATA(8'b0),
-
-    .D_CLR(1'b0),
-    .D_HLT(1'b0),
-    .D_CE(1'b0),
-    .D_SU(1'b0),
-    .D_AIn(1'b0),
-    .D_BIn(1'b0),
-    .D_OIn(1'b0),
-    .D_IIn(1'b0),
-    .D_Jn(1'b0),
-    .D_FIn(1'b0),
-    .D_MIn(1'b0),
-    .D_RI(1'b0),
-    .D_DOn(1'b0),
-    .D_AOn(1'b0),
-    .D_BOn(1'b0),
-    .D_IOn(1'b0),
-    .D_COn(1'b0),
-    .D_EOn(1'b0),
-    .D_ROn(1'b0),
-    .D_NOn(1'b0),
-
-    .BUS(bus),
-    .INREG(ui_in),
-    .OUTREG(uo_out),
-    .HALTED(uio_out[0])
-  );
-
-  assign uio_out[7:1] = 7'b0;
-  assign uio_oe[0] = 1'b1;
-  assign uio_oe[7:1] = 7'b0;
+assign uio_out[1:0] = 2'b0;
+assign uio_out[7:4] = 4'b0;
+assign uio_oe[1:0]  = 2'b0;
+assign uio_oe[7:4]  = 4'b0;
 
 endmodule

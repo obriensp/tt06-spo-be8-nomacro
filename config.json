@@ -8,18 +8,20 @@
   "FP_PDN_HORIZONTAL_HALO": 0,
   "FP_PDN_VERTICAL_HALO": 0,
   "FP_MACRO_VERTICAL_HALO": 0,
-  "FP_MACRO_HORIZONTAL_HALO": 0,
+  "FP_MACRO_HORIZONTAL_HALO": 0.1,
   "MAGIC_LEF_WRITE_USE_GDS": true,
+
+  "GRT_ALLOW_CONGESTION": true,
 
   "MACROS": {
     "RAM8": {
       "instances": {
-        "u_core.datapath.ram.bank0": {
-          "location": [0, 1],
+        "debugger.core.datapath.ram.bank0": {
+          "location": [2.76, 2.76],
           "orientation": "FS"
         },
-        "u_core.datapath.ram.bank1": {
-          "location": [0, 30],
+        "debugger.core.datapath.ram.bank1": {
+          "location": [2.76, 26.5],
           "orientation": "N"
         }
       },

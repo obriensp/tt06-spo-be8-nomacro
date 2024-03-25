@@ -2,11 +2,15 @@
 `timescale 1ns/1ps
 
 module debugger_apb(
+`ifdef USE_POWER_PINS
+  input wire         VPWR,
+  input wire         VGND,
+`endif
   input wire         PCLK,
   input wire         PRESETn,
 
   input wire         PSEL,
-  input wire   [7:0] PADDR,
+  input wire   [4:0] PADDR,
   input wire         PENABLE,
   input wire         PWRITE,
   input wire   [7:0] PWDATA,
@@ -120,6 +124,10 @@ module debugger_apb(
   wire [7:0] OUTREG;
   wire       HALTED;
   core core(
+`ifdef USE_POWER_PINS
+    .VPWR(VPWR),
+    .VGND(VGND),
+`endif
     .CLK(PCLK),
     .RESETn(PRESETn & ~reset_request),
     .DEBUG_REQUEST(DEBUG_REQUEST),
@@ -155,7 +163,7 @@ endmodule
 
 
 module address_decoder(
-  input wire [7:0] PADDR,
+  input wire [4:0] PADDR,
   output reg [1:0] SEL
 );
 
@@ -163,7 +171,7 @@ module address_decoder(
     begin
       if (PADDR == 8'b0)
         SEL <= 2'b00;
-      else if (PADDR[7:3] == 5'b11111)
+      else if (PADDR[4:3] == 5'b11)
         SEL <= 2'b10;
       else
         SEL <= 2'b01;
@@ -208,7 +216,7 @@ module apb_mux(
           PRDATA <= PRDATA2;
           PREADY <= PREADY2;
         end
-      else if (SEL == 2'b11)
+      else // if (SEL == 2'b11)
         begin
           PRDATA <= PRDATA3;
           PREADY <= PREADY3;
@@ -223,7 +231,7 @@ module hardware_id(
   input wire         PRESETn,
 
   input wire         PSEL,
-  input wire   [7:0] PADDR,
+  input wire   [4:0] PADDR,
   input wire         PENABLE,
   input wire         PWRITE,
   input wire   [7:0] PWDATA,

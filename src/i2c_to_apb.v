@@ -20,7 +20,7 @@ module i2c_to_apb(
   input wire   [6:0] device_address_mask,
 
   output wire        PSEL,
-  output wire  [7:0] PADDR,
+  output wire  [4:0] PADDR,
   output wire        PENABLE,
   output wire        PWRITE,
   output wire  [7:0] PWDATA,
@@ -73,7 +73,6 @@ module i2c_to_apb(
     .device_address_mask(device_address_mask)
   );
 
-  wire [7:0] bus_address;
   wire [7:0] bus_wdata;
   wire bus_sel, bus_enable, bus_write;
 

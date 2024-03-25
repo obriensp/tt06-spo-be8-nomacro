@@ -18,7 +18,7 @@ module streams1_to_apb(
   input wire         busy,
 
   output wire        PSEL,
-  output wire  [7:0] PADDR,
+  output wire  [4:0] PADDR,
   output wire        PENABLE,
   output wire        PWRITE,
   output wire  [7:0] PWDATA,
@@ -28,14 +28,14 @@ module streams1_to_apb(
 
   // The first byte written during a transaction is the start address.
   // Consume the byte before passing subsequent data to the bus.
-  reg [7:0] address;
+  reg [4:0] address;
   reg got_first_byte;
   reg previous_got_first_byte;
   always @(posedge CLK)
   begin
     if (~RESETn)
       begin
-        address                 <= 8'b0;
+        address                 <= 5'b0;
         got_first_byte          <= 1'b0;
         previous_got_first_byte <= 1'b0;
       end
@@ -48,7 +48,7 @@ module streams1_to_apb(
           end
         else if (in_valid & ~got_first_byte)
           begin
-            address         <= in_data;
+            address         <= in_data[4:0];
             got_first_byte  <= 1'b1;
           end
       end

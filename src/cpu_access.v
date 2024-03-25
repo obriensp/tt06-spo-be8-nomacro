@@ -6,7 +6,7 @@ module cpu_access(
   input wire         PRESETn,
 
   input wire         PSEL,
-  input wire   [7:0] PADDR,
+  input wire   [4:0] PADDR,
   input wire         PENABLE,
   input wire         PWRITE,
   input wire   [7:0] PWDATA,
@@ -94,7 +94,7 @@ module cpu_access(
   );
 
   wire [7:0] debug_data;
-  assign debug_data = PADDR_OR_PWDATA ? {PADDR - 8'd8} : PWDATA[7:0];
+  assign debug_data = PADDR_OR_PWDATA ? {PADDR - 5'd8} : PWDATA[7:0];
   assign DEBUG_DATA = debug_data;
 
   wire [7:0] rdata;
