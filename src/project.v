@@ -91,8 +91,8 @@ assign scl_i = uio_in[2];
 assign sda_i = uio_in[3];
 assign uio_out[2] = scl_o;
 assign uio_out[3] = sda_o;
-assign uio_oe[2]  = scl_t;
-assign uio_oe[3]  = sda_t;
+assign uio_oe[2]  = ~scl_t;
+assign uio_oe[3]  = ~sda_t;
 
 assign uio_out[1:0] = 2'b0;
 assign uio_out[7:4] = 4'b0;
