@@ -4,6 +4,7 @@
  */
 
 `define default_netname none
+`timescale 1ns/1ps
 
 module tt_um_ram8_macro (
 `ifdef USE_POWER_PINS
@@ -74,11 +75,7 @@ i2c_to_apb adapter(
   .PREADY(pready)
 );
 
-debugger_apb debugger(
-`ifdef USE_POWER_PINS
-  .VPWR(VPWR),
-  .VGND(VGND),
-`endif
+address_reflector reflector(
   .PCLK(clk),
   .PRESETn(rst_n),
   .PSEL(psel),
@@ -87,8 +84,7 @@ debugger_apb debugger(
   .PWRITE(pwrite),
   .PWDATA(pwdata),
   .PRDATA(prdata),
-  .PREADY(pready),
-  .INREG(in1)
+  .PREADY(pready)
 );
 
 assign scl_i = uio_in[2];
@@ -102,5 +98,24 @@ assign uio_out[1:0] = 2'b0;
 assign uio_out[7:4] = 4'b0;
 assign uio_oe[1:0]  = 2'b0;
 assign uio_oe[7:4]  = 4'b0;
+
+endmodule
+
+
+module address_reflector(
+  input wire         PCLK,
+  input wire         PRESETn,
+
+  input wire         PSEL,
+  input wire   [4:0] PADDR,
+  input wire         PENABLE,
+  input wire         PWRITE,
+  input wire   [7:0] PWDATA,
+  output wire  [7:0] PRDATA,
+  output wire        PREADY
+);
+
+  assign PRDATA = {3'b0, PADDR};
+  assign PREADY = 1'b1;
 
 endmodule

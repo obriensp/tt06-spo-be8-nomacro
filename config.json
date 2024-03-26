@@ -15,40 +15,6 @@
 
   "PL_WIRE_LENGTH_COEF": 0.05,
 
-  "MACROS": {
-    "RAM8": {
-      "instances": {
-        "debugger.core.datapath.ram.bank0": {
-          "location": [2.76, 2.76],
-          "orientation": "FS"
-        },
-        "debugger.core.datapath.ram.bank1": {
-          "location": [2.76, 27.5],
-          "orientation": "N"
-        }
-      },
-      "gds": ["dir::macros/RAM8.gds"],
-      "lef": ["dir::macros/RAM8.lef"],
-      "nl": ["dir::macros/RAM8.nl.v"],
-      "spef": {
-        "min_*": ["dir::macros/RAM8.min_.spef"],
-        "nom_*": ["dir::macros/RAM8.nom_.spef"],
-        "max_*": ["dir::macros/RAM8.max_.spef"]
-      },
-      "lib": {
-        "min_tt_025C_1v80": "dir::macros/RAM8.lib/min_tt_025C_1v80/RAM8__min_tt_025C_1v80.lib",
-        "min_ff_n40C_1v95": "dir::macros/RAM8.lib/min_ff_n40C_1v95/RAM8__min_ff_n40C_1v95.lib",
-        "max_ff_n40C_1v95": "dir::macros/RAM8.lib/max_ff_n40C_1v95/RAM8__max_ff_n40C_1v95.lib",
-        "nom_tt_025C_1v80": "dir::macros/RAM8.lib/nom_tt_025C_1v80/RAM8__nom_tt_025C_1v80.lib",
-        "min_ss_100C_1v60": "dir::macros/RAM8.lib/min_ss_100C_1v60/RAM8__min_ss_100C_1v60.lib",
-        "max_ss_100C_1v60": "dir::macros/RAM8.lib/max_ss_100C_1v60/RAM8__max_ss_100C_1v60.lib",
-        "max_tt_025C_1v80": "dir::macros/RAM8.lib/max_tt_025C_1v80/RAM8__max_tt_025C_1v80.lib",
-        "nom_ss_100C_1v60": "dir::macros/RAM8.lib/nom_ss_100C_1v60/RAM8__nom_ss_100C_1v60.lib",
-        "nom_ff_n40C_1v95": "dir::macros/RAM8.lib/nom_ff_n40C_1v95/RAM8__nom_ff_n40C_1v95.lib"
-      }
-    }
-  },
-
   "FP_SIZING": "absolute",
   "DIE_AREA": [0, 0, 161.00, 111.52],
   "FP_DEF_TEMPLATE": "dir::tt/def/tt_block_1x1_pg.def",
