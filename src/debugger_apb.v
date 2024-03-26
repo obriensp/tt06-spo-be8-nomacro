@@ -182,7 +182,7 @@ endmodule
 
 
 module apb_mux(
-  input wire  [1:0] SEL,
+  input wire        SEL,
 
   output reg  [7:0] PRDATA,
   output reg        PREADY,
@@ -202,7 +202,7 @@ module apb_mux(
 
   always @(*)
     begin
-      if (SEL == 2'b00)
+      if (SEL == 1'b0)
         begin
           PRDATA <= PRDATA0;
           PREADY <= PREADY0;

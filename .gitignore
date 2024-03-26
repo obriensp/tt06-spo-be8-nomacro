@@ -11,3 +11,4 @@ test/results.xml
 test/gate_level_netlist.v
 tt/
 .venv/
+__pycache__/

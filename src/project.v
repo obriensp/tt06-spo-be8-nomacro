@@ -45,7 +45,7 @@ wire sda_o;
 wire sda_t;
 
 wire psel;
-wire [7:0] paddr;
+wire [4:0] paddr;
 wire penable;
 wire pwrite;
 wire [7:0] pwdata;
