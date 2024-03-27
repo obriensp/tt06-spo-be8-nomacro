@@ -6,7 +6,7 @@
 `define default_netname none
 `timescale 1ns/1ps
 
-module tt_um_ram8_macro (
+module tt_um_i2c (
 `ifdef USE_POWER_PINS
     input wire        VPWR,
     input wire        VGND,
@@ -18,104 +18,69 @@ module tt_um_ram8_macro (
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
-    input  wire       rst_n     // reset_n - low to reset
+    input  wire       rst_n,    // reset_n - low to reset
+
+    output wire        PCLK,
+    output wire        PRESETn,
+    output wire        PSEL,
+    output wire  [4:0] PADDR,
+    output wire        PENABLE,
+    output wire        PWRITE,
+    output wire  [7:0] PWDATA,
+    input wire   [7:0] PRDATA,
+    input wire         PREADY
 );
-  // All output pins must be assigned. If not used, assign to 0.
-assign uo_out  = ui_in - uio_in;  // Example: ou_out is the difference of ui_in and uio_in
+  wire scl_i;
+  wire scl_o;
+  wire scl_t;
+  wire sda_i;
+  wire sda_o;
+  wire sda_t;
 
-reg [7:0] in0, in1;
-always @(posedge clk)
-  begin
-    if (~rst_n)
-      begin
-        in0 <= 8'b0;
-        in1 <= 8'b0;
-      end
-    else
-      begin
-        in0 <= ui_in;
-        in1 <= in0;
-      end
-  end
+  wire psel;
+  wire [4:0] paddr;
+  wire penable;
+  wire pwrite;
+  wire [7:0] pwdata;
+  wire [7:0] prdata;
+  wire pready;
+  i2c_to_apb adapter(
+    .CLK(clk),
+    .RESETn(rst_n),
 
-wire scl_i;
-wire scl_o;
-wire scl_t;
-wire sda_i;
-wire sda_o;
-wire sda_t;
+    .scl_i(scl_i),
+    .scl_o(scl_o),
+    .scl_t(scl_t),
+    .sda_i(sda_i),
+    .sda_o(sda_o),
+    .sda_t(sda_t),
 
-wire psel;
-wire [4:0] paddr;
-wire penable;
-wire pwrite;
-wire [7:0] pwdata;
-wire [7:0] prdata;
-wire pready;
-i2c_to_apb adapter(
-  .CLK(clk),
-  .RESETn(rst_n),
+    .device_address(7'd42),
+    .device_address_mask(7'h7F),
 
-  .scl_i(scl_i),
-  .scl_o(scl_o),
-  .scl_t(scl_t),
-  .sda_i(sda_i),
-  .sda_o(sda_o),
-  .sda_t(sda_t),
+    .PSEL(PSEL),
+    .PADDR(PADDR),
+    .PENABLE(PENABLE),
+    .PWRITE(PWRITE),
+    .PWDATA(PWDATA),
+    .PRDATA(PRDATA),
+    .PREADY(PREADY)
+  );
 
-  .device_address(7'd42),
-  .device_address_mask(7'h7F),
+  assign PCLK    = clk;
+  assign PRESETn = rst_n;
 
-  .PSEL(psel),
-  .PADDR(paddr),
-  .PENABLE(penable),
-  .PWRITE(pwrite),
-  .PWDATA(pwdata),
-  .PRDATA(prdata),
-  .PREADY(pready)
-);
+  assign scl_i = uio_in[2];
+  assign sda_i = uio_in[3];
+  assign uio_out[2] = scl_o;
+  assign uio_out[3] = sda_o;
+  assign uio_oe[2]  = ~scl_t;
+  assign uio_oe[3]  = ~sda_t;
 
-address_reflector reflector(
-  .PCLK(clk),
-  .PRESETn(rst_n),
-  .PSEL(psel),
-  .PADDR(paddr),
-  .PENABLE(penable),
-  .PWRITE(pwrite),
-  .PWDATA(pwdata),
-  .PRDATA(prdata),
-  .PREADY(pready)
-);
-
-assign scl_i = uio_in[2];
-assign sda_i = uio_in[3];
-assign uio_out[2] = scl_o;
-assign uio_out[3] = sda_o;
-assign uio_oe[2]  = ~scl_t;
-assign uio_oe[3]  = ~sda_t;
-
-assign uio_out[1:0] = 2'b0;
-assign uio_out[7:4] = 4'b0;
-assign uio_oe[1:0]  = 2'b0;
-assign uio_oe[7:4]  = 4'b0;
-
-endmodule
-
-
-module address_reflector(
-  input wire         PCLK,
-  input wire         PRESETn,
-
-  input wire         PSEL,
-  input wire   [4:0] PADDR,
-  input wire         PENABLE,
-  input wire         PWRITE,
-  input wire   [7:0] PWDATA,
-  output wire  [7:0] PRDATA,
-  output wire        PREADY
-);
-
-  assign PRDATA = {3'b0, PADDR};
-  assign PREADY = 1'b1;
+  assign uio_out[1:0] = 2'b0;
+  assign uio_out[7:4] = 4'b0;
+  assign uio_oe[1:0]  = 2'b0;
+  assign uio_oe[7:4]  = 4'b0;
+  assign uo_out       = 8'b0;
 
 endmodule

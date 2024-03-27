@@ -1,5 +1,5 @@
 {
-  "DESIGN_NAME": "tt_um_ram8_macro",
+  "DESIGN_NAME": "tt_um_i2c",
   "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/register4.v", "src/status_reg.v", "src/streams1_to_apb.v", "src/streams4_to_apb.v"],
   "EXTRA_VERILOG_MODELS": ["src/RAM8.v"],
 
@@ -16,8 +16,10 @@
   "PL_WIRE_LENGTH_COEF": 0.05,
 
   "FP_SIZING": "absolute",
-  "DIE_AREA": [0, 0, 161.00, 111.52],
-  "FP_DEF_TEMPLATE": "dir::tt/def/tt_block_1x1_pg.def",
+  "DIE_AREA": [0, 0, 161.00, 38.08],
+  "FP_DEF_TEMPLATE": "test.def",
+  "//FP_PIN_ORDER_CFG": "pins.cfg",
+  "//FP_IO_VLAYER": "met4",
 
   "//": "use alternative efabless decap cells to solve LI density issue",
   "DECAP_CELL": [

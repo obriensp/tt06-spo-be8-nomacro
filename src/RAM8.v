@@ -1,7 +1,7 @@
 /// sta-blackbox
 
 `default_nettype none
-`timescale 1ns/1ns
+`timescale 1ns/1ps
 
 module RAM8(
 `ifdef USE_POWER_PINS
