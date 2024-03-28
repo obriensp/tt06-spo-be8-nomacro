@@ -1,25 +1,57 @@
 {
-  "DESIGN_NAME": "tt_um_i2c",
+  "DESIGN_NAME": "tt_um_spo_i2ctest",
   "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/register4.v", "src/status_reg.v", "src/streams1_to_apb.v", "src/streams4_to_apb.v"],
-  "EXTRA_VERILOG_MODELS": ["src/RAM8.v"],
+  "EXTRA_VERILOG_MODELS": ["src/RAM8.v", "src/I2C.v"],
 
   "FP_PDN_CHECK_NODES": false,
   "FP_PDN_CFG": "pdn_cfg.tcl",
   "FP_PDN_HORIZONTAL_HALO": 0,
   "FP_PDN_VERTICAL_HALO": 0,
-  "FP_MACRO_VERTICAL_HALO": 0,
-  "FP_MACRO_HORIZONTAL_HALO": 2,
+  "FP_MACRO_VERTICAL_HALO": 10,
+  "FP_MACRO_HORIZONTAL_HALO": 0,
   "MAGIC_LEF_WRITE_USE_GDS": true,
 
   "GRT_ALLOW_CONGESTION": true,
 
+  "PL_TARGET_DENSITY_PCT": 0.85,
   "PL_WIRE_LENGTH_COEF": 0.05,
 
+  "DESIGN_REPAIR_BUFFER_INPUT_PORTS": false,
+  "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": false,
+
+  "MACROS": {
+    "I2C": {
+      "instances": {
+        "i2c": {
+          "location": [2.76, 67],
+          "orientation": "N"
+        }
+      },
+      "gds": ["dir::macros/I2C/I2C.gds"],
+      "lef": ["dir::macros/I2C/I2C.lef"],
+      "nl": ["dir::macros/I2C/I2C.nl.v"],
+      "spef": {
+        "min_*": ["dir::macros/I2C/I2C.min.spef"],
+        "nom_*": ["dir::macros/I2C/I2C.nom.spef"],
+        "max_*": ["dir::macros/I2C/I2C.max.spef"]
+      },
+      "lib": {
+        "min_tt_025C_1v80": "dir::macros/I2C/lib/min_tt_025C_1v80/I2C__min_tt_025C_1v80.lib",
+        "min_ff_n40C_1v95": "dir::macros/I2C/lib/min_ff_n40C_1v95/I2C__min_ff_n40C_1v95.lib",
+        "max_ff_n40C_1v95": "dir::macros/I2C/lib/max_ff_n40C_1v95/I2C__max_ff_n40C_1v95.lib",
+        "nom_tt_025C_1v80": "dir::macros/I2C/lib/nom_tt_025C_1v80/I2C__nom_tt_025C_1v80.lib",
+        "min_ss_100C_1v60": "dir::macros/I2C/lib/min_ss_100C_1v60/I2C__min_ss_100C_1v60.lib",
+        "max_ss_100C_1v60": "dir::macros/I2C/lib/max_ss_100C_1v60/I2C__max_ss_100C_1v60.lib",
+        "max_tt_025C_1v80": "dir::macros/I2C/lib/max_tt_025C_1v80/I2C__max_tt_025C_1v80.lib",
+        "nom_ss_100C_1v60": "dir::macros/I2C/lib/nom_ss_100C_1v60/I2C__nom_ss_100C_1v60.lib",
+        "nom_ff_n40C_1v95": "dir::macros/I2C/lib/nom_ff_n40C_1v95/I2C__nom_ff_n40C_1v95.lib"
+      }
+    }
+  },
+
   "FP_SIZING": "absolute",
-  "DIE_AREA": [0, 0, 161.00, 38.08],
-  "FP_DEF_TEMPLATE": "test.def",
-  "//FP_PIN_ORDER_CFG": "pins.cfg",
-  "//FP_IO_VLAYER": "met4",
+  "DIE_AREA": [0, 0, 161.00, 111.52],
+  "FP_DEF_TEMPLATE": "dir::tt/def/tt_block_1x1_pg.def",
 
   "//": "use alternative efabless decap cells to solve LI density issue",
   "DECAP_CELL": [

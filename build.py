@@ -32,8 +32,8 @@ class CustomPower(OdbpyStep):
 		)
 
 	def get_command(self) -> List[str]:
-		macro = self.config["MACROS"]['RAM8']
-		instance = macro.instances['debugger.core.datapath.ram.bank0']
+		macro = self.config["MACROS"]['I2C']
+		instance = macro.instances['i2c']
 		return super().get_command() + [
 			"--macro-x-pos",
 			instance.location[0],
@@ -49,7 +49,7 @@ if __name__ == '__main__':
 	parser.add_argument("--open-in-klayout", action="store_true", help="Open last run in KLayout")
 
   # Insert our custom step after the PDN generation
-	# ProjectFlow.Steps.insert(ProjectFlow.Steps.index(OpenROAD.GeneratePDN) + 1, CustomPower)
+	ProjectFlow.Steps.insert(ProjectFlow.Steps.index(OpenROAD.GeneratePDN) + 1, CustomPower)
 
 	args = parser.parse_args()
 	config = vars(args)

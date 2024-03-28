@@ -6,7 +6,7 @@
 `define default_netname none
 `timescale 1ns/1ps
 
-module tt_um_i2c (
+module tt_um_spo_i2ctest(
 `ifdef USE_POWER_PINS
     input wire        VPWR,
     input wire        VGND,
@@ -18,46 +18,37 @@ module tt_um_i2c (
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
-    input  wire       rst_n,    // reset_n - low to reset
-
-    output wire        PCLK,
-    output wire        PRESETn,
-    output wire        PSEL,
-    output wire  [4:0] PADDR,
-    output wire        PENABLE,
-    output wire        PWRITE,
-    output wire  [7:0] PWDATA,
-    input wire   [7:0] PRDATA,
-    input wire         PREADY
+    input  wire       rst_n     // reset_n - low to reset
 );
-  wire scl_i;
-  wire scl_o;
-  wire scl_t;
-  wire sda_i;
-  wire sda_o;
-  wire sda_t;
+  wire        PCLK;
+  wire        PRESETn;
+  wire        PSEL;
+  wire  [4:0] PADDR;
+  wire        PENABLE;
+  wire        PWRITE;
+  wire  [7:0] PWDATA;
+  wire  [7:0] PRDATA;
+  wire        PREADY;
 
-  wire psel;
-  wire [4:0] paddr;
-  wire penable;
-  wire pwrite;
-  wire [7:0] pwdata;
-  wire [7:0] prdata;
-  wire pready;
-  i2c_to_apb adapter(
-    .CLK(clk),
-    .RESETn(rst_n),
+  (* clkbuf_inhibit *)
+  wire [7:0] _ui_in = ui_in;
 
-    .scl_i(scl_i),
-    .scl_o(scl_o),
-    .scl_t(scl_t),
-    .sda_i(sda_i),
-    .sda_o(sda_o),
-    .sda_t(sda_t),
+  I2C i2c(
+`ifdef USE_POWER_PINS
+    .VPWR(VPWR),
+    .VGND(VGND),
+`endif
+    .ui_in(_ui_in),
+    .uo_out(uo_out),
+    .uio_in(uio_in),
+    .uio_out(uio_out),
+    .uio_oe(uio_oe),
+    .ena(ena),
+    .clk(clk),
+    .rst_n(rst_n),
 
-    .device_address(7'd42),
-    .device_address_mask(7'h7F),
-
+    .PCLK(PCLK),
+    .PRESETn(PRESETn),
     .PSEL(PSEL),
     .PADDR(PADDR),
     .PENABLE(PENABLE),
@@ -67,20 +58,36 @@ module tt_um_i2c (
     .PREADY(PREADY)
   );
 
-  assign PCLK    = clk;
-  assign PRESETn = rst_n;
+  reflector refl(
+    .PCLK(PCLK),
+    .PRESETn(PRESETn),
+    .PSEL(PSEL),
+    .PADDR(PADDR),
+    .PENABLE(PENABLE),
+    .PWRITE(PWRITE),
+    .PWDATA(PWDATA),
+    .PRDATA(PRDATA),
+    .PREADY(PREADY)
+  );
 
-  assign scl_i = uio_in[2];
-  assign sda_i = uio_in[3];
-  assign uio_out[2] = scl_o;
-  assign uio_out[3] = sda_o;
-  assign uio_oe[2]  = ~scl_t;
-  assign uio_oe[3]  = ~sda_t;
+endmodule
 
-  assign uio_out[1:0] = 2'b0;
-  assign uio_out[7:4] = 4'b0;
-  assign uio_oe[1:0]  = 2'b0;
-  assign uio_oe[7:4]  = 4'b0;
-  assign uo_out       = 8'b0;
+
+module reflector(
+  input wire         PCLK,
+  input wire         PRESETn,
+
+  input wire         PSEL,
+  input wire   [4:0] PADDR,
+  input wire         PENABLE,
+  input wire         PWRITE,
+  input wire   [7:0] PWDATA,
+  output wire  [7:0] PRDATA,
+  output wire        PREADY
+);
+
+  // assign PRDATA = {3'b0, PADDR};
+  assign PRDATA = 8'b0;
+  assign PREADY = 1'b1;
 
 endmodule
