@@ -30,15 +30,12 @@ module tt_um_spo_i2ctest(
   wire  [7:0] PRDATA;
   wire        PREADY;
 
-  (* clkbuf_inhibit *)
-  wire [7:0] _ui_in = ui_in;
-
   I2C i2c(
 `ifdef USE_POWER_PINS
     .VPWR(VPWR),
     .VGND(VGND),
 `endif
-    .ui_in(_ui_in),
+    .ui_in(ui_in),
     .uo_out(uo_out),
     .uio_in(uio_in),
     .uio_out(uio_out),
