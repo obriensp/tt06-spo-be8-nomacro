@@ -32,8 +32,6 @@ project:
     - "ram.v"
     - "register.v"
     - "status_reg.v"
-    - "streams1_to_apb.v"
-    - "streams4_to_apb.v"
     - "RAM8.v"
     - "I2C.v"
 

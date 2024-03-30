@@ -7,13 +7,13 @@
   "FP_PDN_CFG": "pdn_cfg.tcl",
   "FP_PDN_HORIZONTAL_HALO": 0,
   "FP_PDN_VERTICAL_HALO": 0,
-  "FP_MACRO_VERTICAL_HALO": 0.5,
-  "FP_MACRO_HORIZONTAL_HALO": 2,
+  "FP_MACRO_VERTICAL_HALO": 1.0,
+  "FP_MACRO_HORIZONTAL_HALO": 1.4,
   "MAGIC_LEF_WRITE_USE_GDS": true,
 
   "GRT_ALLOW_CONGESTION": true,
 
-  "PL_TARGET_DENSITY": 0.75,
+  "PL_TARGET_DENSITY": 0.81,
   "PL_WIRE_LENGTH_COEF": 0.05,
 
   "DESIGN_REPAIR_BUFFER_INPUT_PORTS": false,
@@ -54,7 +54,7 @@
           "orientation": "FS"
         },
         "debugger.core.datapath.ram.bank1": {
-          "location": [2.76, 26.5],
+          "location": [2.76, 29.92],
           "orientation": "N"
         }
       },
