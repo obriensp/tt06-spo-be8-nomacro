@@ -20,14 +20,14 @@ module control(
   wire reset_counter;
   reg [2:0] counter;
 
-  assign T0 = counter == 3'b0;
+  assign T0 = counter == 3'b0 | counter == 3'b111;
   assign reset_counter = counter == 3'd5;
 
   // counter increments on *falling* edge of CLK, out of phase with the rest of the machine
   always @(negedge CLK or negedge RESETn)
     begin
       if (~RESETn)
-        counter <= 3'b0;
+        counter <= 3'b111;
       else
         if (reset_counter)
           counter <= 3'b0;
