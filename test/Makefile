@@ -7,7 +7,7 @@ TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES = project.v
 
-PROJECT_SOURCES += alu.v bus_mux.v control.v core.v cpu_access.v datapath.v debugger_apb.v debugger_microcode.v full_adder.v i2c_slave.v i2c_to_apb.v microcode.v pc.v ram.v register.v register4.v status_reg.v streams1_to_apb.v streams4_to_apb.v RAM8.v I2C.v
+PROJECT_SOURCES += alu.v bus_mux.v control.v core.v cpu_access.v datapath.v debugger_apb.v debugger_microcode.v full_adder.v i2c_slave.v i2c_to_apb.v microcode.v pc.v ram.v register.v register4.v status_reg.v RAM8.v I2C.v
 
 ifneq ($(GATES),yes)
 

@@ -1,19 +1,19 @@
 {
   "DESIGN_NAME": "tt_um_spo_i2ctest",
-  "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/register4.v", "src/status_reg.v", "src/streams1_to_apb.v", "src/streams4_to_apb.v"],
+  "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/register4.v", "src/status_reg.v"],
   "EXTRA_VERILOG_MODELS": ["src/RAM8.v", "src/I2C.v"],
 
   "FP_PDN_CHECK_NODES": false,
   "FP_PDN_CFG": "pdn_cfg.tcl",
   "FP_PDN_HORIZONTAL_HALO": 0,
   "FP_PDN_VERTICAL_HALO": 0,
-  "FP_MACRO_VERTICAL_HALO": 0,
-  "FP_MACRO_HORIZONTAL_HALO": 0,
+  "FP_MACRO_VERTICAL_HALO": 0.5,
+  "FP_MACRO_HORIZONTAL_HALO": 2,
   "MAGIC_LEF_WRITE_USE_GDS": true,
 
   "GRT_ALLOW_CONGESTION": true,
 
-  "PL_TARGET_DENSITY_PCT": 0.85,
+  "PL_TARGET_DENSITY": 0.75,
   "PL_WIRE_LENGTH_COEF": 0.05,
 
   "DESIGN_REPAIR_BUFFER_INPUT_PORTS": false,
@@ -45,6 +45,37 @@
         "max_tt_025C_1v80": "dir::macros/I2C/lib/max_tt_025C_1v80/I2C__max_tt_025C_1v80.lib",
         "nom_ss_100C_1v60": "dir::macros/I2C/lib/nom_ss_100C_1v60/I2C__nom_ss_100C_1v60.lib",
         "nom_ff_n40C_1v95": "dir::macros/I2C/lib/nom_ff_n40C_1v95/I2C__nom_ff_n40C_1v95.lib"
+      }
+    },
+    "RAM8": {
+      "instances": {
+        "debugger.core.datapath.ram.bank0": {
+          "location": [2.76, 2.70],
+          "orientation": "FS"
+        },
+        "debugger.core.datapath.ram.bank1": {
+          "location": [2.76, 26.5],
+          "orientation": "N"
+        }
+      },
+      "gds": ["dir::macros/RAM8/RAM8.gds"],
+      "lef": ["dir::macros/RAM8/RAM8.lef"],
+      "nl": ["dir::macros/RAM8/RAM8.nl.v"],
+      "spef": {
+        "min_*": ["dir::macros/RAM8/RAM8.min.spef"],
+        "nom_*": ["dir::macros/RAM8/RAM8.nom.spef"],
+        "max_*": ["dir::macros/RAM8/RAM8.max.spef"]
+      },
+      "lib": {
+        "min_tt_025C_1v80": "dir::macros/RAM8/lib/min_tt_025C_1v80/RAM8__min_tt_025C_1v80.lib",
+        "min_ff_n40C_1v95": "dir::macros/RAM8/lib/min_ff_n40C_1v95/RAM8__min_ff_n40C_1v95.lib",
+        "max_ff_n40C_1v95": "dir::macros/RAM8/lib/max_ff_n40C_1v95/RAM8__max_ff_n40C_1v95.lib",
+        "nom_tt_025C_1v80": "dir::macros/RAM8/lib/nom_tt_025C_1v80/RAM8__nom_tt_025C_1v80.lib",
+        "min_ss_100C_1v60": "dir::macros/RAM8/lib/min_ss_100C_1v60/RAM8__min_ss_100C_1v60.lib",
+        "max_ss_100C_1v60": "dir::macros/RAM8/lib/max_ss_100C_1v60/RAM8__max_ss_100C_1v60.lib",
+        "max_tt_025C_1v80": "dir::macros/RAM8/lib/max_tt_025C_1v80/RAM8__max_tt_025C_1v80.lib",
+        "nom_ss_100C_1v60": "dir::macros/RAM8/lib/nom_ss_100C_1v60/RAM8__nom_ss_100C_1v60.lib",
+        "nom_ff_n40C_1v95": "dir::macros/RAM8/lib/nom_ff_n40C_1v95/RAM8__nom_ff_n40C_1v95.lib"
       }
     }
   },

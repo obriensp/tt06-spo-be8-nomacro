@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-`define default_netname none
+`default_nettype none
 `timescale 1ns/1ps
 
 module tt_um_spo_i2ctest(
@@ -55,7 +55,11 @@ module tt_um_spo_i2ctest(
     .PREADY(PREADY)
   );
 
-  reflector refl(
+  debugger_apb debugger(
+  `ifdef USE_POWER_PINS
+    .VPWR(VPWR),
+    .VGND(VGND),
+  `endif
     .PCLK(PCLK),
     .PRESETn(PRESETn),
     .PSEL(PSEL),
@@ -64,7 +68,8 @@ module tt_um_spo_i2ctest(
     .PWRITE(PWRITE),
     .PWDATA(PWDATA),
     .PRDATA(PRDATA),
-    .PREADY(PREADY)
+    .PREADY(PREADY),
+    .INREG(8'b0)
   );
 
 endmodule
