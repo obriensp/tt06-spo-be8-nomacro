@@ -23,7 +23,7 @@ module status_reg(
   always @(posedge PCLK)
     begin
       if (~PRESETn)
-        debug_request <= 1'b0;
+        debug_request <= 1'b1;
       else if (PSEL & PENABLE & ~previous_enable & PWRITE)
         debug_request <= debug_request ^ PWDATA[0];
     end

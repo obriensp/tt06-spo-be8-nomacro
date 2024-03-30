@@ -64,11 +64,11 @@ async def test_ram8(dut):
   dut._log.info("Reading status register")
   status_reg = await read_i2c(controller, 0x00, 1)
   dut._log.info(f"Status register: {status_reg}")
-  assert status_reg == b'\0'
+  assert status_reg == b'\x03'
 
   # Enable debug access
-  dut._log.info("Requesting debug access")
-  await write_i2c(controller, 0x00, 0x01.to_bytes(1))
+  # dut._log.info("Requesting debug access")
+  # await write_i2c(controller, 0x00, 0x01.to_bytes(1))
 
   # Check the status register again and assert that our debug request was acknowledged
   status_reg = await read_i2c(controller, 0x00, 1)
