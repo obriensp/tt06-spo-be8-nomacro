@@ -30,13 +30,14 @@ module tt_um_spo_i2ctest(
   wire  [7:0] PRDATA;
   wire        PREADY;
 
+  wire [7:0] unused;
   I2C i2c(
 `ifdef USE_POWER_PINS
     .VPWR(VPWR),
     .VGND(VGND),
 `endif
     .ui_in(ui_in),
-    .uo_out(uo_out),
+    .uo_out(unused),
     .uio_in(uio_in),
     .uio_out(uio_out),
     .uio_oe(uio_oe),
@@ -55,6 +56,21 @@ module tt_um_spo_i2ctest(
     .PREADY(PREADY)
   );
 
+  reg [7:0] in0, in1;
+  always @(posedge PCLK)
+    begin
+      if (~PRESETn)
+        begin
+          in0 <= 8'b0;
+          in1 <= 8'b0;
+        end
+      else
+        begin
+          in0 <= ui_in;
+          in1 <= in0;
+        end
+    end
+
   debugger_apb debugger(
   `ifdef USE_POWER_PINS
     .VPWR(VPWR),
@@ -69,7 +85,8 @@ module tt_um_spo_i2ctest(
     .PWDATA(PWDATA),
     .PRDATA(PRDATA),
     .PREADY(PREADY),
-    .INREG(8'b0)
+    .INREG(in1),
+    .OUTREG(uo_out)
   );
 
 endmodule

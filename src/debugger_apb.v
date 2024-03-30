@@ -17,7 +17,8 @@ module debugger_apb(
   output wire  [7:0] PRDATA,
   output wire        PREADY,
 
-  input wire   [7:0] INREG
+  input wire   [7:0] INREG,
+  output wire  [7:0] OUTREG
 );
 
   // wire [1:0] selected_device;
@@ -122,7 +123,6 @@ module debugger_apb(
   wire       D_AIn, D_BIn, D_OIn, D_IIn, D_Jn, D_FIn, D_MIn, D_RI;
   wire       D_DOn, D_AOn, D_BOn, D_IOn, D_COn, D_EOn, D_ROn, D_NOn;
   wire [7:0] BUS;
-  wire [7:0] OUTREG;
   wire       HALTED;
   core core(
 `ifdef USE_POWER_PINS
