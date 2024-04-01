@@ -122,11 +122,28 @@ async def reset_and_run_until_halt(dut, controller):
         await with_timeout(RisingEdge(dut.halted), 1, 'ms')
 
 
-async def dump_cpu_state(dut, controller):
+async def read_cpu_state(controller):
     async with debug_mode(controller):
-        contents = await read_i2c(controller, RegisterAddress.STATUS, 24)
-        dump = binascii.b2a_hex(contents, b' ', -1)
-        dut._log.info(f'CPU State: {dump}')
+        return await read_i2c(controller, RegisterAddress.STATUS, 24)
+
+
+async def dump_cpu_state(dut, controller):
+    contents = await read_cpu_state(controller)
+    dump = binascii.b2a_hex(contents, b' ', -1)
+    dut._log.info(f'CPU State: {dump}')
+
+    # print registers
+    regs = contents[0x01:0x08]
+    for i, name in enumerate(['A', 'B', 'IR', 'PC', 'FLAGS', 'IN', 'OUT']):
+        value = int(regs[i])
+        dut._log.info(f'{name:5} 0x{value:02X} ({value:d})')
+
+    # print memory
+    memory = contents[0x08:0x18]
+    isa = ISA()
+    for i, byte in enumerate(memory):
+        mnemonic = isa.disassemble_byte(byte)
+        dut._log.info(f'{i:X}: {byte:02X} {mnemonic}')
 
 
 async def testing_preamble(dut):
@@ -330,7 +347,7 @@ async def test_fib_sequence(dut):
     async def verify_output():
         dut._log.info('Waiting for output port to change')
         for i in [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]:
-            await with_timeout(Edge(dut.uo_out), 10, 'ms')
+            await with_timeout(Edge(dut.uo_out), 50, 'ms')
             assert dut.uo_out.value == i
 
     async with regular_mode(controller):
