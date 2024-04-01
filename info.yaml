@@ -11,7 +11,7 @@ project:
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_spo_i2ctest"
+  top_module:  "tt_um_obriensp_be8"
 
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
@@ -38,30 +38,30 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "Input Port"
+  ui[1]: "Input Port"
+  ui[2]: "Input Port"
+  ui[3]: "Input Port"
+  ui[4]: "Input Port"
+  ui[5]: "Input Port"
+  ui[6]: "Input Port"
+  ui[7]: "Input Port"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "Output Port"
+  uo[1]: "Output Port"
+  uo[2]: "Output Port"
+  uo[3]: "Output Port"
+  uo[4]: "Output Port"
+  uo[5]: "Output Port"
+  uo[6]: "Output Port"
+  uo[7]: "Output Port"
 
   # Bidirectional pins
   uio[0]: ""
   uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
+  uio[2]: "SCL"
+  uio[3]: "SDA"
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""

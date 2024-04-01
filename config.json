@@ -1,5 +1,5 @@
 {
-  "DESIGN_NAME": "tt_um_spo_i2ctest",
+  "DESIGN_NAME": "tt_um_obriensp_be8",
   "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/register4.v", "src/status_reg.v"],
   "EXTRA_VERILOG_MODELS": ["src/RAM8.v", "src/I2C.v"],
 

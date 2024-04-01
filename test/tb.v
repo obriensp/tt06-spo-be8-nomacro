@@ -30,7 +30,7 @@ module tb ();
 
 
   // Replace tt_um_example with your module name:
-  tt_um_spo_i2ctest user_project (
+  tt_um_obriensp_be8 user_project (
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
