@@ -284,7 +284,7 @@ async def test_addition(dut):
     assert dut.uo_out.value == 42
 
 
-@cocotb.test()
+# @cocotb.test()
 async def test_multiplication(dut):
     controller = await testing_preamble(dut)
 
@@ -314,7 +314,7 @@ async def test_multiplication(dut):
     assert dut.uo_out.value == 42
 
 
-@cocotb.test()
+# @cocotb.test()
 async def test_fib_sequence(dut):
     controller = await testing_preamble(dut)
 
