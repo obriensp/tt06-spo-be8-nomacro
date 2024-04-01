@@ -93,7 +93,7 @@ module tt_um_obriensp_be8(
     .HALTED(halted)
   );
 
-  assign uio_out = {3'b0, halted, i2c_uio_out[3:0]};
-  assign uio_oe  = {3'b0, 1'b1,   i2c_uio_oe[3:0]};
+  assign uio_out = {i2c_uio_out[7:5], halted, i2c_uio_out[3:0]};
+  assign uio_oe  = {i2c_uio_oe[7:5],  1'b1,   i2c_uio_oe[3:0]};
 
 endmodule
