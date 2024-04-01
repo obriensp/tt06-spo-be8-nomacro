@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+import argparse
+from isa import ISA
+import sys
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog='as',
+        description='BE8 Assembler')
+    parser.add_argument('filename')
+    args = parser.parse_args()
+
+    isa = ISA()
+
+    s = open(args.filename, 'r').read()
+    binary = isa.assemble(s)
+
+    for byte in binary:
+        print(f"{byte:02X}")
+
+if __name__ == '__main__':
+    sys.exit(main())

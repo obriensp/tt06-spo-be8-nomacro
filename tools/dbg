@@ -1,0 +1,137 @@
+#!/usr/bin/env python3
+
+import click
+from click.parser import split_arg_string
+from completer import CommandCompleter
+from i2c import I2CDevice
+from isa import ISA
+from prompt_toolkit import PromptSession
+import sys
+import time
+
+def current_device():
+    obj = click.get_current_context().obj
+    device = obj['device']
+    if device is None:
+        raise Exception("Device is not connected")
+    return device
+
+@click.group()
+def foo():
+    pass
+
+@foo.command()
+def status():
+    device = current_device()
+    status = device.read_register(0x00)
+    click.echo(f'Status: 0x{status:02X}')
+
+@foo.command()
+def attach():
+    device = current_device()
+    status = device.read_register(0x00)
+    if status & 0x3:
+        click.echo('Already attached')
+    else:
+        device.write_register(0x00, 0x01)
+
+@foo.command()
+def detach():
+    device = current_device()
+    status = device.read_register(0x00)
+    if status & 0x3 == 0:
+        click.echo('Not attached')
+    else:
+        device.write_register(0x00, 0x01)
+
+@foo.command()
+def reset():
+    current_device().write_register(0x00, 0x04)
+
+@foo.command()
+@click.argument('filename', type=click.Path(exists=True))
+def assemble(filename):
+    isa = ISA()
+
+    s = open(filename, 'r').read()
+    binary = isa.assemble(s)
+
+    for i, byte in enumerate(binary):
+        click.echo(f'{i:X}: {byte:02X}')
+
+    if len(binary) > 16:
+        click.echo(f'Program is too large for memory')
+        return
+
+    binary = binary + b'\0' * (16 - len(binary))
+    click.echo(f'Padded: {binary}')
+
+    device = current_device()
+    click.echo('Programming...', nl=False)
+    for i, byte in enumerate(binary):
+        click.echo('.', nl=False)
+        device.write_register(0x08 + i, byte)
+    click.echo('done')
+
+
+@foo.command()
+def disassemble():
+    device = current_device()
+    # memory = b''
+    # for i in range(0x4, 0x8):
+    #     memory += device.read_register(i).to_bytes(4)
+    memory = bytes([device.read_register(addr) for addr in range(0x08, 0x18)])
+
+    isa = ISA()
+    for i, byte in enumerate(memory):
+        mnemonic = isa.disassemble_byte(byte)
+        click.echo(f'{i:X}: {byte:02X} {mnemonic}')
+
+@foo.group()
+def info():
+    pass
+
+@info.command()
+def regs():
+    device = current_device()
+    regs = [device.read_register(addr) for addr in range(0x01, 0x08)]
+    click.echo(f'Regs: {regs}')
+    for i, name in enumerate(['A', 'B', 'IR', 'PC', 'FLAGS', 'IN', 'OUT']):
+        value = int(regs[i])
+        click.echo(f'{name:5} 0x{value:02X} ({value:d})')
+
+
+@foo.command()
+def quit():
+    sys.exit()
+
+def main():
+    # FIXME: create device on startup; get rid of 'connect' command.
+    device = I2CDevice(address=42)
+
+    completer = CommandCompleter(foo)
+    session = PromptSession(completer=completer, complete_while_typing=False)
+    obj = { 'device': device }
+
+    hwid = bytes([device.read_register(addr) for addr in range(0xF8, 0xFC)])
+    click.echo(f'HWID: {hwid}')
+
+    while True:
+        try:
+            text = session.prompt('> ')
+        except KeyboardInterrupt:
+            continue
+        except EOFError:
+            break
+        else:
+            context = foo.make_context(None, split_arg_string(text))
+            context.obj = obj
+
+            try:
+                result = foo.invoke(context)
+            except Exception as e:
+                click.echo(e)
+
+
+if __name__ == '__main__':
+    main()
