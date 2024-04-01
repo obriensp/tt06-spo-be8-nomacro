@@ -283,6 +283,8 @@ async def test_multiplication(dut):
     """)
 
     await reset_and_run_until_halt(dut, controller)
+    dut._log.info(f'Result: {dut.uo_out.value}')
+    dut._log.info(f'Result: {dut.uo_out.value.integer}')
     assert dut.uo_out.value == 42
 
 
