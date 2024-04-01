@@ -99,3 +99,16 @@ async def test_ram8(dut):
   # write a string
   string = b"Hello, world!\r\n\0"
   await write_and_verify_full_mem(controller, string)
+
+  # reset and assert that the CPU is not halted
+  await write_i2c(controller, 0x00, b'\x04')
+  assert dut.halted.value == 0
+
+  # write a HLT instruction, reset, detach, verify that it has halted
+  status_before = await read_i2c(controller, 0x00, 1)
+  dut._log.info(f'Status before: {status_before}, HALTED before: {dut.halted.value}')
+  await write_i2c(controller, 0x08, b'\xFF')
+  await write_i2c(controller, 0x00, b'\x05')
+  status_after = await read_i2c(controller, 0x00, 1)
+  dut._log.info(f'Status after: {status_after}, HALTED after: {dut.halted.value}')
+  assert dut.halted.value == 1

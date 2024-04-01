@@ -28,6 +28,7 @@ module tb ();
   wire scl_o = uio_out[2];
   wire sda_o = uio_out[3];
 
+  wire halted = uio_out[4];
 
   // Replace tt_um_example with your module name:
   tt_um_obriensp_be8 user_project (

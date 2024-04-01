@@ -30,6 +30,8 @@ module tt_um_obriensp_be8(
   wire  [7:0] PRDATA;
   wire        PREADY;
 
+  wire [7:0] i2c_uio_out;
+  wire [7:0] i2c_uio_oe;
   wire [7:0] unused;
   I2C i2c(
 `ifdef USE_POWER_PINS
@@ -39,8 +41,8 @@ module tt_um_obriensp_be8(
     .ui_in(ui_in),
     .uo_out(unused),
     .uio_in(uio_in),
-    .uio_out(uio_out),
-    .uio_oe(uio_oe),
+    .uio_out(i2c_uio_out),
+    .uio_oe(i2c_uio_oe),
     .ena(ena),
     .clk(clk),
     .rst_n(rst_n),
@@ -71,6 +73,7 @@ module tt_um_obriensp_be8(
         end
     end
 
+  wire halted;
   debugger_apb debugger(
   `ifdef USE_POWER_PINS
     .VPWR(VPWR),
@@ -86,27 +89,11 @@ module tt_um_obriensp_be8(
     .PRDATA(PRDATA),
     .PREADY(PREADY),
     .INREG(in1),
-    .OUTREG(uo_out)
+    .OUTREG(uo_out),
+    .HALTED(halted)
   );
 
-endmodule
-
-
-module reflector(
-  input wire         PCLK,
-  input wire         PRESETn,
-
-  input wire         PSEL,
-  input wire   [4:0] PADDR,
-  input wire         PENABLE,
-  input wire         PWRITE,
-  input wire   [7:0] PWDATA,
-  output wire  [7:0] PRDATA,
-  output wire        PREADY
-);
-
-  // assign PRDATA = {3'b0, PADDR};
-  assign PRDATA = 8'b0;
-  assign PREADY = 1'b1;
+  assign uio_out = {3'b0, halted, i2c_uio_out[3:0]};
+  assign uio_oe  = {3'b0, 1'b1,   i2c_uio_oe[3:0]};
 
 endmodule
