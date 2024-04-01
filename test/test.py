@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: © 2023 Uri Shaked <uri@tinytapeout.com>
 # SPDX-License-Identifier: MIT
 
+import binascii
 import cocotb
 from cocotb.binary import BinaryRepresentation, BinaryValue
 from cocotb.clock import Clock
@@ -119,6 +120,13 @@ async def reset_and_run_until_halt(dut, controller):
     async with regular_mode(controller):
         await request_reset(controller)
         await with_timeout(RisingEdge(dut.halted), 1, 'ms')
+
+
+async def dump_cpu_state(dut, controller):
+    async with debug_mode(controller):
+        contents = await read_i2c(controller, RegisterAddress.STATUS, 24)
+        dump = binascii.b2a_hex(contents, b' ', -1)
+        dut._log.info(f'CPU State: {dump}')
 
 
 async def testing_preamble(dut):
@@ -285,6 +293,7 @@ async def test_multiplication(dut):
     await reset_and_run_until_halt(dut, controller)
     dut._log.info(f'Result: {dut.uo_out.value}')
     dut._log.info(f'Result: {dut.uo_out.value.integer}')
+    await dump_cpu_state(dut, controller)
     assert dut.uo_out.value == 42
 
 
