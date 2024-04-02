@@ -1,7 +1,7 @@
 {
   "DESIGN_NAME": "tt_um_obriensp_be8",
-  "VERILOG_FILES": ["src/project.v", "src/alu.v", "src/bus_mux.v", "src/control.v", "src/cpu/core.v", "src/cpu_access.v", "src/datapath.v", "src/debugger_apb.v", "src/debugger_microcode.v", "src/full_adder.v", "src/i2c_slave.v", "src/i2c_to_apb.v", "src/microcode.v", "src/pc.v", "src/ram.v", "src/register.v", "src/register4.v", "src/status_reg.v"],
-  "EXTRA_VERILOG_MODELS": ["src/RAM8.v", "src/I2C.v"],
+  "VERILOG_FILES": ["src/project.v", "src/cpu/alu.v", "src/cpu/bus_mux.v", "src/cpu/control.v", "src/cpu/core.v", "src/debugger/cpu_access.v", "src/cpu/datapath.v", "src/debugger/debugger_apb.v", "src/debugger/debugger_microcode.v", "src/cpu/full_adder.v", "src/i2c/i2c_slave.v", "src/i2c/i2c_to_apb.v", "src/cpu/microcode.v", "src/cpu/pc.v", "src/cpu/ram.v", "src/cpu/register.v", "src/cpu/register4.v", "src/debugger/status_reg.v"],
+  "EXTRA_VERILOG_MODELS": ["src/cpu/RAM8.v", "src/i2c/I2C.v"],
 
   "FP_PDN_CHECK_NODES": false,
   "FP_PDN_CFG": "pdn_cfg.tcl",
