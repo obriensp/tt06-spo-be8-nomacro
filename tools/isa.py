@@ -23,7 +23,7 @@ class ISA:
             for c in CF:
                 for z in ZF:
                     for i, step in enumerate(steps):
-                        self.microcode.append(f"8'b{opcode:04b}{c}{z}{i:02b}: signals <= 18'b{step:018b};")
+                        self.microcode.append(f"8'b{opcode:04b}{c}{z}{i:02b}: signals = 18'b{step:018b};")
                         if step & IO == 0:
                             self.has_operand[opcode] = True
 

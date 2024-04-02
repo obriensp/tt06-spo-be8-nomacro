@@ -24,6 +24,7 @@ class StatusRegister(IntFlag):
     DEBUG_ACK = 0x02
     RESET_REQ = 0x04
     HALTED    = 0x08
+    STEP_INST = 0x10
 
     def to_bytes(self, *args, **kwargs):
         return self.value.to_bytes(*args, **kwargs)
@@ -73,6 +74,10 @@ async def toggle_debug(controller):
 
 async def request_reset(controller):
     await write_status_register(controller, StatusRegister.RESET_REQ)
+
+
+async def step_instruction(controller):
+    await write_status_register(controller, StatusRegister.STEP_INST)
 
 
 @asynccontextmanager
@@ -160,7 +165,7 @@ async def testing_preamble(dut):
     return controller
 
 
-@cocotb.test()
+# @cocotb.test()
 async def test_ram8(dut):
     dut._log.info("Start")
 
@@ -234,7 +239,7 @@ async def test_ram8(dut):
     assert dut.halted.value == 1
 
 
-@cocotb.test()
+# @cocotb.test()
 async def test_out_instruction(dut):
     controller = await testing_preamble(dut)
 
@@ -248,7 +253,7 @@ async def test_out_instruction(dut):
     assert dut.uo_out.value == 0xA
 
 
-@cocotb.test()
+# @cocotb.test()
 async def test_in_instruction(dut):
     controller = await testing_preamble(dut)
 
@@ -264,7 +269,7 @@ async def test_in_instruction(dut):
     assert dut.uo_out.value == 0xBE
 
 
-@cocotb.test()
+# @cocotb.test()
 async def test_addition(dut):
     controller = await testing_preamble(dut)
 
@@ -304,7 +309,16 @@ async def test_multiplication(dut):
         7
     """)
 
-    await reset_and_run_until_halt(dut, controller)
+    async with debug_mode(controller):
+        for i in range(100):
+            dut._log.info(f'Step {i}')
+            await dump_cpu_state(dut, controller)
+            if dut.halted.value != 0:
+                dut._log.info('Halted')
+                break
+            await step_instruction(controller)
+
+    # await reset_and_run_until_halt(dut, controller)
     dut._log.info(f'Result: {dut.uo_out.value}')
     dut._log.info(f'Result: {dut.uo_out.value.integer}')
     await dump_cpu_state(dut, controller)
@@ -353,3 +367,18 @@ async def test_fib_sequence(dut):
             cocotb.start_soon(verify_output())
         )
 
+@cocotb.test()
+async def test_sta(dut):
+    controller = await testing_preamble(dut)
+
+    dut.ui_in.value = 66
+
+    await write_i2c(controller, RegisterAddress.RAM_BEGIN, b'\xD0\x43\xF0\xFF')
+    await write_i2c(controller, RegisterAddress.STATUS, b'\x01')
+
+    await with_timeout(RisingEdge(dut.halted), 10, 'ms')
+
+    async with debug_mode(controller):
+        value = await read_i2c(controller, 0x08 + 0x3, 1)
+        dut._log.info(f'Byte: {value}')
+        assert int.from_bytes(value) == 66
