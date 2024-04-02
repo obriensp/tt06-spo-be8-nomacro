@@ -40,6 +40,18 @@ module status_reg(
     end
   assign RESET_REQUEST = reset_request != 2'b00;
 
+  reg [2:0] stepping;
+  wire allow_debug_req = stepping == 2'b0;
+  always @(posedge PCLK)
+    begin
+      if (~PRESETn)
+        stepping <= 2'b0;
+      else if (PSEL & PENABLE & ~previous_enable & PWRITE & PWDATA[4])
+        stepping <= 3'b111;
+      else if (stepping != 2'b0)
+        stepping <= stepping - 1;
+    end
+
   reg previous_enable;
   always @(posedge PCLK)
     begin
@@ -49,7 +61,7 @@ module status_reg(
         previous_enable <= PENABLE;
     end
 
-  assign DEBUG_REQUEST = debug_request;
+  assign DEBUG_REQUEST = debug_request & allow_debug_req;
   assign PRDATA = {4'h0, HALTED, RESET_REQUEST, DEBUG_ACK, DEBUG_REQUEST};
   assign PREADY = 1'b1;
 endmodule

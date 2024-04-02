@@ -45,6 +45,11 @@ def detach():
         device.write_register(0x00, 0x01)
 
 @foo.command()
+def step():
+    device = current_device()
+    device.write_register(0x00, 0x10)
+
+@foo.command()
 def reset():
     current_device().write_register(0x00, 0x04)
 
