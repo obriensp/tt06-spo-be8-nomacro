@@ -106,15 +106,14 @@ def quit():
     sys.exit()
 
 def main():
-    # FIXME: create device on startup; get rid of 'connect' command.
     device = I2CDevice(address=42)
 
     completer = CommandCompleter(foo)
     session = PromptSession(completer=completer, complete_while_typing=False)
     obj = { 'device': device }
 
-    hwid = bytes([device.read_register(addr) for addr in range(0xF8, 0xFC)])
-    click.echo(f'HWID: {hwid}')
+    # hwid = bytes([device.read_register(addr) for addr in range(0xF8, 0xFC)])
+    # click.echo(f'HWID: {hwid}')
 
     while True:
         try:

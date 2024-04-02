@@ -1,0 +1,55 @@
+set_io -nowarn CLK100MHZ       P7
+set_io -nowarn RESETn          P8
+
+set_io -nowarn SCL             A4
+set_io -nowarn SDA             A3
+
+set_io -nowarn LED[0]             J11
+set_io -nowarn LED[1]             K11
+set_io -nowarn LED[2]             K12
+set_io -nowarn LED[3]             K14
+set_io -nowarn LED[4]             L12
+set_io -nowarn LED[5]             L14
+set_io -nowarn LED[6]             M12
+set_io -nowarn LED[7]             N14
+
+set_io -nowarn segments[0]     J1
+set_io -nowarn segments[1]     J3
+set_io -nowarn segments[2]     N1
+set_io -nowarn segments[3]     K4
+set_io -nowarn segments[4]     K3
+set_io -nowarn segments[5]     L1
+set_io -nowarn segments[6]     M1
+set_io -nowarn segments[7]     P1
+set_io -nowarn anodes[3]       H3
+set_io -nowarn anodes[2]       H1
+set_io -nowarn anodes[1]       G1
+set_io -nowarn anodes[0]       G3
+
+#A 5
+#B 6
+#C 48
+#D 46
+#E 45
+#F 3
+#G 2
+#P 49
+#AN0 43
+#AN1 42
+#AN2 8
+#AN3 9
+
+
+
+# A 5 J1
+# B 6 J3
+# C 48
+# D 46
+# E 45
+# F 3
+# G 2
+# P 49
+# AN0 43 H1
+# AN1 42 H3
+# AN2 8
+# AN3 9

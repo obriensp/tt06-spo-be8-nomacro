@@ -18,5 +18,4 @@ class I2CDevice:
   def write_register(self, address, value):
       assert address >= 0 and address < 256
       combined = [self.write_address, address] + list(value.to_bytes(1, byteorder='big'))
-      print(f'Writing {combined}')
       self.i2c.write_then_read(len(combined), 0, combined)

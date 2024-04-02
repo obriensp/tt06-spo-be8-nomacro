@@ -1,0 +1,13 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "cmake --build build --target alchitry_cu"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "iceprog build\/target\/alchitry_cu\/alchitry_cu.bin"
+    }
+  },
+  "buildBeforeRunning" : true
+}
