@@ -19,7 +19,7 @@ project:
     - "alu.v"
     - "bus_mux.v"
     - "control.v"
-    - "core.v"
+    - "cpu/core.v"
     - "cpu_access.v"
     - "datapath.v"
     - "debugger_apb.v"
