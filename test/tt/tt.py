@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: © 2023 Uri Shaked <uri@tinytapeout.com>
-# SPDX-License-Identifier: MIT
-
 import binascii
 import cocotb
 from cocotb.binary import BinaryRepresentation, BinaryValue
@@ -8,7 +5,7 @@ from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles, Combine, Edge, RisingEdge, with_timeout
 from contextlib import asynccontextmanager
 from enum import Enum, IntFlag
-from i2c import I2cMaster
+from test.i2c import I2cMaster
 from tools.isa import ISA
 
 device_address = 42

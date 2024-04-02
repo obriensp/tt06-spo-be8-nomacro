@@ -135,7 +135,7 @@ function(add_cocotb_test)
   endif()
 
   if (NOT COCOTB_TESTBENCH)
-    set(COCOTB_TESTBENCH "tests.${COCOTB_TOP}")
+    set(COCOTB_TESTBENCH "${COCOTB_TOP}")
   endif()
 
   if (NOT COCOTB_SOURCES)
@@ -187,7 +187,7 @@ function(add_cocotb_test)
   )
   set_tests_properties(${COCOTB_TOP} PROPERTIES
     FIXTURES_REQUIRED "fixture_iverilog_${COCOTB_TOP}"
-    ENVIRONMENT "MODULE=${COCOTB_TESTBENCH};COCOTB_RESULTS_FILE=${COCOTB_RESULTS_XML}"
+    ENVIRONMENT "MODULE=${COCOTB_TESTBENCH};COCOTB_RESULTS_FILE=${COCOTB_RESULTS_XML};PYTHONPATH=${PROJECT_SOURCE_DIR}"
     FAIL_REGULAR_EXPRESSION "FAIL=[^0];Failed to import module;No tests were discovered"
   )
 endfunction()

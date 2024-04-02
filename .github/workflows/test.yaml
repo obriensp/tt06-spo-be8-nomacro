@@ -26,7 +26,7 @@ jobs:
 
       - name: Run tests
         run: |
-          cd test
+          cd test/tt
           make clean
           make
           # make will return success even if the test fails, so check for failure in the results.xml
@@ -35,7 +35,7 @@ jobs:
       - name: Test Summary
         uses: test-summary/action@v2.2
         with:
-          paths: "test/results.xml"
+          paths: "test/tt/results.xml"
         if: always()
 
       - name: upload vcd
@@ -44,5 +44,5 @@ jobs:
         with:
           name: test-vcd
           path: |
-            test/tb.vcd
-            test/result.xml
+            test/tt/tb.vcd
+            test/tt/result.xml
