@@ -16,38 +16,38 @@ module ram(
   input wire RI
 );
 
-  wire [7:0] out0;
-  wire [7:0] out1;
+  // wire [7:0] out0;
+  // wire [7:0] out1;
 
-  wire RAM0_EN = ~ADDR[3];
-  wire RAM1_EN =  ADDR[3];
+  // wire RAM0_EN = ~ADDR[3];
+  // wire RAM1_EN =  ADDR[3];
 
-  RAM8 bank0(
+  RAM16 bank0(
 `ifdef USE_POWER_PINS
     .VPWR(VPWR),
     .VGND(VGND),
 `endif
     .CLK(CLK),
-    .EN0(RAM0_EN),
+    .EN0(1'b1),
     .WE0(RI),
-    .A0(ADDR[2:0]),
+    .A0(ADDR),
     .Di0(DIN),
-    .Do0(out0)
+    .Do0(DOUT)
   );
 
-  RAM8 bank1(
-`ifdef USE_POWER_PINS
-    .VPWR(VPWR),
-    .VGND(VGND),
-`endif
-    .CLK(CLK),
-    .EN0(RAM1_EN),
-    .WE0(RI),
-    .A0(ADDR[2:0]),
-    .Di0(DIN),
-    .Do0(out1)
-  );
+//   RAM8 bank1(
+// `ifdef USE_POWER_PINS
+//     .VPWR(VPWR),
+//     .VGND(VGND),
+// `endif
+//     .CLK(CLK),
+//     .EN0(RAM1_EN),
+//     .WE0(RI),
+//     .A0(ADDR[2:0]),
+//     .Di0(DIN),
+//     .Do0(out1)
+//   );
 
-  assign DOUT = RI ? 8'b0 : (RAM0_EN ? out0 : out1);
+  // assign DOUT = RI ? 8'b0 : (RAM0_EN ? out0 : out1);
 
 endmodule

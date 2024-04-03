@@ -26,7 +26,6 @@ module RAM8 (CLK,
  wire \DEC0.SEL[7] ;
  wire \WEBUF[0].X ;
  wire \WORD[0].W.BYTE[0].B.CLK ;
- wire \WORD[0].W.BYTE[0].B.CLK_B ;
  wire \WORD[0].W.BYTE[0].B.Do0[0] ;
  wire \WORD[0].W.BYTE[0].B.Do0[1] ;
  wire \WORD[0].W.BYTE[0].B.Do0[2] ;
@@ -48,7 +47,6 @@ module RAM8 (CLK,
  wire \WORD[0].W.BYTE[0].B.SEL0_B ;
  wire \WORD[0].W.BYTE[0].B.WE0_WIRE ;
  wire \WORD[1].W.BYTE[0].B.CLK ;
- wire \WORD[1].W.BYTE[0].B.CLK_B ;
  wire \WORD[1].W.BYTE[0].B.GCLK ;
  wire \WORD[1].W.BYTE[0].B.Q_WIRE[0] ;
  wire \WORD[1].W.BYTE[0].B.Q_WIRE[1] ;
@@ -62,7 +60,6 @@ module RAM8 (CLK,
  wire \WORD[1].W.BYTE[0].B.SEL0_B ;
  wire \WORD[1].W.BYTE[0].B.WE0_WIRE ;
  wire \WORD[2].W.BYTE[0].B.CLK ;
- wire \WORD[2].W.BYTE[0].B.CLK_B ;
  wire \WORD[2].W.BYTE[0].B.GCLK ;
  wire \WORD[2].W.BYTE[0].B.Q_WIRE[0] ;
  wire \WORD[2].W.BYTE[0].B.Q_WIRE[1] ;
@@ -76,7 +73,6 @@ module RAM8 (CLK,
  wire \WORD[2].W.BYTE[0].B.SEL0_B ;
  wire \WORD[2].W.BYTE[0].B.WE0_WIRE ;
  wire \WORD[3].W.BYTE[0].B.CLK ;
- wire \WORD[3].W.BYTE[0].B.CLK_B ;
  wire \WORD[3].W.BYTE[0].B.GCLK ;
  wire \WORD[3].W.BYTE[0].B.Q_WIRE[0] ;
  wire \WORD[3].W.BYTE[0].B.Q_WIRE[1] ;
@@ -90,7 +86,6 @@ module RAM8 (CLK,
  wire \WORD[3].W.BYTE[0].B.SEL0_B ;
  wire \WORD[3].W.BYTE[0].B.WE0_WIRE ;
  wire \WORD[4].W.BYTE[0].B.CLK ;
- wire \WORD[4].W.BYTE[0].B.CLK_B ;
  wire \WORD[4].W.BYTE[0].B.GCLK ;
  wire \WORD[4].W.BYTE[0].B.Q_WIRE[0] ;
  wire \WORD[4].W.BYTE[0].B.Q_WIRE[1] ;
@@ -104,7 +99,6 @@ module RAM8 (CLK,
  wire \WORD[4].W.BYTE[0].B.SEL0_B ;
  wire \WORD[4].W.BYTE[0].B.WE0_WIRE ;
  wire \WORD[5].W.BYTE[0].B.CLK ;
- wire \WORD[5].W.BYTE[0].B.CLK_B ;
  wire \WORD[5].W.BYTE[0].B.GCLK ;
  wire \WORD[5].W.BYTE[0].B.Q_WIRE[0] ;
  wire \WORD[5].W.BYTE[0].B.Q_WIRE[1] ;
@@ -118,7 +112,6 @@ module RAM8 (CLK,
  wire \WORD[5].W.BYTE[0].B.SEL0_B ;
  wire \WORD[5].W.BYTE[0].B.WE0_WIRE ;
  wire \WORD[6].W.BYTE[0].B.CLK ;
- wire \WORD[6].W.BYTE[0].B.CLK_B ;
  wire \WORD[6].W.BYTE[0].B.GCLK ;
  wire \WORD[6].W.BYTE[0].B.Q_WIRE[0] ;
  wire \WORD[6].W.BYTE[0].B.Q_WIRE[1] ;
@@ -132,7 +125,6 @@ module RAM8 (CLK,
  wire \WORD[6].W.BYTE[0].B.SEL0_B ;
  wire \WORD[6].W.BYTE[0].B.WE0_WIRE ;
  wire \WORD[7].W.BYTE[0].B.CLK ;
- wire \WORD[7].W.BYTE[0].B.CLK_B ;
  wire \WORD[7].W.BYTE[0].B.GCLK ;
  wire \WORD[7].W.BYTE[0].B.Q_WIRE[0] ;
  wire \WORD[7].W.BYTE[0].B.Q_WIRE[1] ;
@@ -201,50 +193,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[0].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[0].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[0].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[0].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[0].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[0].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[0].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[0].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[0].W.BYTE[0].B.CGAND  (.A(\WORD[0].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -252,11 +244,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[0].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[0].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[0].W.BYTE[0].B.SEL0INV  (.A(\WORD[0].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[0].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[0].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[0].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[0].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[0].W.BYTE[0].B.CLK ),
     .GATE(\WORD[0].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[0].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[0].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[0].W.BYTE[0].B.CLK ),
-    .Y(\WORD[0].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[0].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[0].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[0].W.SEL0BUF  (.A(\DEC0.SEL[0] ),
@@ -264,50 +254,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[1].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[1].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[1].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[1].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[1].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[1].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[1].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[1].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[1].W.BYTE[0].B.CGAND  (.A(\WORD[1].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -315,11 +305,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[1].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[1].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[1].W.BYTE[0].B.SEL0INV  (.A(\WORD[1].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[1].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[1].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[1].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[1].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[1].W.BYTE[0].B.CLK ),
     .GATE(\WORD[1].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[1].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[1].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[1].W.BYTE[0].B.CLK ),
-    .Y(\WORD[1].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[1].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[1].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[1].W.SEL0BUF  (.A(\DEC0.SEL[1] ),
@@ -327,50 +315,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[2].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[2].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[2].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[2].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[2].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[2].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[2].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[2].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[2].W.BYTE[0].B.CGAND  (.A(\WORD[2].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -378,11 +366,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[2].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[2].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[2].W.BYTE[0].B.SEL0INV  (.A(\WORD[2].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[2].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[2].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[2].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[2].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[2].W.BYTE[0].B.CLK ),
     .GATE(\WORD[2].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[2].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[2].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[2].W.BYTE[0].B.CLK ),
-    .Y(\WORD[2].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[2].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[2].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[2].W.SEL0BUF  (.A(\DEC0.SEL[2] ),
@@ -390,50 +376,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[3].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[3].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[3].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[3].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[3].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[3].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[3].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[3].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[3].W.BYTE[0].B.CGAND  (.A(\WORD[3].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -441,11 +427,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[3].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[3].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[3].W.BYTE[0].B.SEL0INV  (.A(\WORD[3].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[3].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[3].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[3].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[3].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[3].W.BYTE[0].B.CLK ),
     .GATE(\WORD[3].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[3].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[3].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[3].W.BYTE[0].B.CLK ),
-    .Y(\WORD[3].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[3].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[3].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[3].W.SEL0BUF  (.A(\DEC0.SEL[3] ),
@@ -453,50 +437,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[4].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[4].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[4].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[4].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[4].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[4].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[4].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[4].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[4].W.BYTE[0].B.CGAND  (.A(\WORD[4].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -504,11 +488,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[4].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[4].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[4].W.BYTE[0].B.SEL0INV  (.A(\WORD[4].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[4].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[4].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[4].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[4].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[4].W.BYTE[0].B.CLK ),
     .GATE(\WORD[4].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[4].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[4].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[4].W.BYTE[0].B.CLK ),
-    .Y(\WORD[4].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[4].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[4].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[4].W.SEL0BUF  (.A(\DEC0.SEL[4] ),
@@ -516,50 +498,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[5].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[5].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[5].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[5].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[5].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[5].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[5].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[5].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[5].W.BYTE[0].B.CGAND  (.A(\WORD[5].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -567,11 +549,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[5].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[5].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[5].W.BYTE[0].B.SEL0INV  (.A(\WORD[5].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[5].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[5].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[5].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[5].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[5].W.BYTE[0].B.CLK ),
     .GATE(\WORD[5].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[5].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[5].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[5].W.BYTE[0].B.CLK ),
-    .Y(\WORD[5].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[5].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[5].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[5].W.SEL0BUF  (.A(\DEC0.SEL[5] ),
@@ -579,50 +559,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[6].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[6].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[6].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[6].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[6].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[6].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[6].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[6].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[6].W.BYTE[0].B.CGAND  (.A(\WORD[6].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -630,11 +610,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[6].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[6].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[6].W.BYTE[0].B.SEL0INV  (.A(\WORD[6].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[6].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[6].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[6].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[6].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[6].W.BYTE[0].B.CLK ),
     .GATE(\WORD[6].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[6].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[6].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[6].W.BYTE[0].B.CLK ),
-    .Y(\WORD[6].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[6].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[6].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[6].W.SEL0BUF  (.A(\DEC0.SEL[6] ),
@@ -642,50 +620,50 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[0].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[0] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[0] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.D(Di0[0]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[0].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[0]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[0] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[1].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[1] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[1] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.D(Di0[1]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[1].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[1]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[1] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[2].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[2] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[2] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.D(Di0[2]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[2].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[2]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[2] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[3].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[3] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[3] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.D(Di0[3]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[3].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[3]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[3] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[4].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[4] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[4] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.D(Di0[4]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[4].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[4]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[4] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[5].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[5] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[5] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.D(Di0[5]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[5].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[5]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[5] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[6].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[6] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[6] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.D(Di0[6]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[6].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[6]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[6] ));
  sky130_fd_sc_hd__ebufn_2 \WORD[7].W.BYTE[0].B.BIT[7].OBUF0  (.A(\WORD[7].W.BYTE[0].B.Q_WIRE[7] ),
     .TE_B(\WORD[7].W.BYTE[0].B.SEL0_B ),
     .Z(\WORD[0].W.BYTE[0].B.Do0[7] ));
- sky130_fd_sc_hd__dlxtp_1 \WORD[7].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.D(Di0[7]),
-    .GATE(\WORD[7].W.BYTE[0].B.GCLK ),
+ sky130_fd_sc_hd__dfxtp_1 \WORD[7].W.BYTE[0].B.BIT[7].genblk1.STORAGE  (.CLK(\WORD[7].W.BYTE[0].B.GCLK ),
+    .D(Di0[7]),
     .Q(\WORD[7].W.BYTE[0].B.Q_WIRE[7] ));
  sky130_fd_sc_hd__and2_1 \WORD[7].W.BYTE[0].B.CGAND  (.A(\WORD[7].W.BYTE[0].B.SEL0 ),
     .B(\WEBUF[0].X ),
@@ -693,11 +671,9 @@ module RAM8 (CLK,
  sky130_fd_sc_hd__diode_2 \WORD[7].W.BYTE[0].B.DIODE_CLK  (.DIODE(\WORD[7].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__inv_1 \WORD[7].W.BYTE[0].B.SEL0INV  (.A(\WORD[7].W.BYTE[0].B.SEL0 ),
     .Y(\WORD[7].W.BYTE[0].B.SEL0_B ));
- sky130_fd_sc_hd__dlclkp_1 \WORD[7].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[7].W.BYTE[0].B.CLK_B ),
+ sky130_fd_sc_hd__dlclkp_1 \WORD[7].W.BYTE[0].B.genblk1.CG  (.CLK(\WORD[7].W.BYTE[0].B.CLK ),
     .GATE(\WORD[7].W.BYTE[0].B.WE0_WIRE ),
     .GCLK(\WORD[7].W.BYTE[0].B.GCLK ));
- sky130_fd_sc_hd__inv_1 \WORD[7].W.BYTE[0].B.genblk1.CLKINV  (.A(\WORD[7].W.BYTE[0].B.CLK ),
-    .Y(\WORD[7].W.BYTE[0].B.CLK_B ));
  sky130_fd_sc_hd__clkbuf_4 \WORD[7].W.CLKBUF  (.A(\CLKBUF.X ),
     .X(\WORD[7].W.BYTE[0].B.CLK ));
  sky130_fd_sc_hd__clkbuf_2 \WORD[7].W.SEL0BUF  (.A(\DEC0.SEL[7] ),

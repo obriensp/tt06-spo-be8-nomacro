@@ -36,30 +36,31 @@ def power(reader, macro_x_pos: float):
   ymin = 10000
   ymax = ymin + 97700
 
+  pitch = 51200
   x_vpwr = 15520
-  x_vgnd = x_vpwr + 76800
+  x_vgnd = x_vpwr + pitch // 2
 
-  for i in range(1):
-    x = int(macro_x_pos * 1000 + x_vpwr + i * 153600)
+  for i in range(3):
+    x = int(macro_x_pos * 1000 + x_vpwr + i * pitch)
     odb.dbSBox_create(vpwr_wire, met4, x, ymin, x + 1600, ymax, "STRIPE")
     odb.dbBox_create(vpwr_bpin, met4, x, ymin, x + 1600, ymax)
-  for i in range(1):
-    x = int(macro_x_pos * 1000 + x_vgnd + i * 153600)
+  for i in range(3):
+    x = int(macro_x_pos * 1000 + x_vgnd + i * pitch)
     odb.dbSBox_create(vgnd_wire, met4, x, ymin, x + 1600, ymax, "STRIPE")
     odb.dbBox_create(vgnd_bpin, met4, x, ymin, x + 1600, ymax)
 
 #
-  x_vpwr = 131220
-  x_vgnd = x_vpwr + 2760
+  x_vpwr = x_vgnd + pitch * 2 - 3100
+  # x_vgnd = x_vpwr + 2760
 
   for i in range(1):
     x = int(macro_x_pos * 1000 + x_vpwr + i * 153600)
     odb.dbSBox_create(vpwr_wire, met4, x, ymin, x + 1600, ymax, "STRIPE")
     odb.dbBox_create(vpwr_bpin, met4, x, ymin, x + 1600, ymax)
-  for i in range(1):
-    x = int(macro_x_pos * 1000 + x_vgnd + i * 153600)
-    odb.dbSBox_create(vgnd_wire, met4, x, ymin, x + 1600, ymax, "STRIPE")
-    odb.dbBox_create(vgnd_bpin, met4, x, ymin, x + 1600, ymax)
+  # for i in range(1):
+  #   x = int(macro_x_pos * 1000 + x_vgnd + i * 153600)
+  #   odb.dbSBox_create(vgnd_wire, met4, x, ymin, x + 1600, ymax, "STRIPE")
+  #   odb.dbBox_create(vgnd_bpin, met4, x, ymin, x + 1600, ymax)
 
 
 if __name__ == "__main__":

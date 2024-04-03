@@ -19,7 +19,7 @@ set(COMMON_SOURCES
   src/cpu/microcode.v
   src/cpu/pc.v
   src/cpu/ram.v
-  src/cpu/RAM8.v
+  src/cpu/RAM16.v
   src/cpu/register.v
   src/cpu/register4.v
 

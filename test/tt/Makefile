@@ -6,7 +6,7 @@ SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../../src
 PROJECT_SOURCES = tt_top.v
-PROJECT_SOURCES += cpu/alu.v cpu/bus_mux.v cpu/control.v cpu/core.v debugger/cpu_access.v cpu/datapath.v debugger/debugger_apb.v debugger/debugger_microcode.v cpu/full_adder.v i2c/i2c_slave.v i2c/i2c_to_apb.v cpu/microcode.v cpu/pc.v cpu/ram.v cpu/register.v cpu/register4.v debugger/status_reg.v cpu/RAM8.v i2c/I2C.v
+PROJECT_SOURCES += cpu/alu.v cpu/bus_mux.v cpu/control.v cpu/core.v debugger/cpu_access.v cpu/datapath.v debugger/debugger_apb.v debugger/debugger_microcode.v cpu/full_adder.v i2c/i2c_slave.v i2c/i2c_to_apb.v cpu/microcode.v cpu/pc.v cpu/ram.v cpu/register.v cpu/register4.v debugger/status_reg.v cpu/RAM16.v i2c/I2C.v
 
 ifneq ($(GATES),yes)
 
@@ -29,7 +29,7 @@ VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_f
 
 # this gets copied in by the GDS action workflow
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
-VERILOG_SOURCES += $(PWD)/../../macros/RAM8/RAM8.pnl.v
+VERILOG_SOURCES += $(PWD)/../../macros/RAM16/RAM16.pnl.v
 VERILOG_SOURCES += $(PWD)/../../macros/I2C/I2C.pnl.v
 
 endif

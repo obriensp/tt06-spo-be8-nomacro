@@ -165,7 +165,7 @@ async def testing_preamble(dut):
     return controller
 
 
-# @cocotb.test()
+@cocotb.test()
 async def test_ram8(dut):
     dut._log.info("Start")
 
@@ -239,7 +239,7 @@ async def test_ram8(dut):
     assert dut.halted.value == 1
 
 
-# @cocotb.test()
+@cocotb.test()
 async def test_out_instruction(dut):
     controller = await testing_preamble(dut)
 
@@ -253,7 +253,7 @@ async def test_out_instruction(dut):
     assert dut.uo_out.value == 0xA
 
 
-# @cocotb.test()
+@cocotb.test()
 async def test_in_instruction(dut):
     controller = await testing_preamble(dut)
 
@@ -269,7 +269,7 @@ async def test_in_instruction(dut):
     assert dut.uo_out.value == 0xBE
 
 
-# @cocotb.test()
+@cocotb.test()
 async def test_addition(dut):
     controller = await testing_preamble(dut)
 
@@ -286,7 +286,7 @@ async def test_addition(dut):
     assert dut.uo_out.value == 42
 
 
-# @cocotb.test()
+@cocotb.test()
 async def test_multiplication(dut):
     controller = await testing_preamble(dut)
 
