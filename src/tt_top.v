@@ -30,17 +30,14 @@ module tt_um_obriensp_be8(
   wire  [7:0] PRDATA;
   wire        PREADY;
 
-  wire [7:0] i2c_uio_out;
-  wire [7:0] i2c_uio_oe;
-  wire [7:0] unused;
+  wire [3:2] i2c_uio_out;
+  wire [3:2] i2c_uio_oe;
   I2C i2c(
 `ifdef USE_POWER_PINS
     .VPWR(VPWR),
     .VGND(VGND),
 `endif
-    .ui_in(ui_in),
-    .uo_out(unused),
-    .uio_in(uio_in),
+    .uio_in(uio_in[3:2]),
     .uio_out(i2c_uio_out),
     .uio_oe(i2c_uio_oe),
     .ena(ena),
@@ -93,7 +90,7 @@ module tt_um_obriensp_be8(
     .HALTED(halted)
   );
 
-  assign uio_out = {i2c_uio_out[7:5], halted, i2c_uio_out[3:0]};
-  assign uio_oe  = {i2c_uio_oe[7:5],  1'b1,   i2c_uio_oe[3:0]};
+  assign uio_out = {3'b0, halted, i2c_uio_out[3:2], 2'b0};
+  assign uio_oe  = {3'b0,  1'b1,   i2c_uio_oe[3:2], 2'b0};
 
 endmodule

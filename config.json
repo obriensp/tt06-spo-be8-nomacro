@@ -1,7 +1,7 @@
 {
   "DESIGN_NAME": "tt_um_obriensp_be8",
-  "VERILOG_FILES": ["src/tt_top.v", "src/cpu/alu.v", "src/cpu/bus_mux.v", "src/cpu/control.v", "src/cpu/core.v", "src/debugger/cpu_access.v", "src/cpu/datapath.v", "src/debugger/debugger_apb.v", "src/debugger/debugger_microcode.v", "src/cpu/full_adder.v", "src/i2c/i2c_slave.v", "src/i2c/i2c_to_apb.v", "src/cpu/microcode.v", "src/cpu/pc.v", "src/cpu/ram.v", "src/cpu/register.v", "src/cpu/register4.v", "src/debugger/status_reg.v"],
-  "EXTRA_VERILOG_MODELS": ["src/cpu/RAM8.v", "src/cpu/RAM16.v", "src/i2c/I2C.v"],
+  "VERILOG_FILES": ["src/tt_top.v", "src/cpu/alu.v", "src/cpu/bus_mux.v", "src/cpu/control.v", "src/cpu/core.v", "src/debugger/cpu_access.v", "src/cpu/datapath.v", "src/debugger/debugger_apb.v", "src/debugger/debugger_microcode.v", "src/cpu/full_adder.v", "src/i2c/i2c_slave.v", "src/i2c/i2c_to_apb.v", "src/cpu/microcode.v", "src/cpu/pc.v", "src/cpu/ram.v", "src/cpu/register.v", "src/cpu/register4.v", "src/debugger/status_reg.v", "src/i2c/I2C.v"],
+  "EXTRA_VERILOG_MODELS": ["src/cpu/RAM8.v", "src/cpu/RAM16.v"],
 
   "FP_PDN_CHECK_NODES": false,
   "FP_PDN_CFG": "pdn_cfg.tcl",
@@ -15,7 +15,7 @@
 
   "GRT_ALLOW_CONGESTION": true,
 
-  "PL_TARGET_DENSITY": 0.94,
+  "//PL_TARGET_DENSITY": 0.94,
   "GRT_ANTENNA_MARGIN": 15,
   "RUN_HEURISTIC_DIODE_INSERTION": true,
   "DESIGN_REPAIR_MAX_WIRE_LENGTH": 800,
@@ -25,33 +25,6 @@
   "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": false,
 
   "MACROS": {
-    "I2C": {
-      "instances": {
-        "i2c": {
-          "location": [2.76, 77.5],
-          "orientation": "N"
-        }
-      },
-      "gds": ["dir::macros/I2C/I2C.gds"],
-      "lef": ["dir::macros/I2C/I2C.lef"],
-      "nl": ["dir::macros/I2C/I2C.nl.v"],
-      "spef": {
-        "min_*": ["dir::macros/I2C/I2C.min.spef"],
-        "nom_*": ["dir::macros/I2C/I2C.nom.spef"],
-        "max_*": ["dir::macros/I2C/I2C.max.spef"]
-      },
-      "lib": {
-        "min_tt_025C_1v80": "dir::macros/I2C/lib/min_tt_025C_1v80/I2C__min_tt_025C_1v80.lib",
-        "min_ff_n40C_1v95": "dir::macros/I2C/lib/min_ff_n40C_1v95/I2C__min_ff_n40C_1v95.lib",
-        "max_ff_n40C_1v95": "dir::macros/I2C/lib/max_ff_n40C_1v95/I2C__max_ff_n40C_1v95.lib",
-        "nom_tt_025C_1v80": "dir::macros/I2C/lib/nom_tt_025C_1v80/I2C__nom_tt_025C_1v80.lib",
-        "min_ss_100C_1v60": "dir::macros/I2C/lib/min_ss_100C_1v60/I2C__min_ss_100C_1v60.lib",
-        "max_ss_100C_1v60": "dir::macros/I2C/lib/max_ss_100C_1v60/I2C__max_ss_100C_1v60.lib",
-        "max_tt_025C_1v80": "dir::macros/I2C/lib/max_tt_025C_1v80/I2C__max_tt_025C_1v80.lib",
-        "nom_ss_100C_1v60": "dir::macros/I2C/lib/nom_ss_100C_1v60/I2C__nom_ss_100C_1v60.lib",
-        "nom_ff_n40C_1v95": "dir::macros/I2C/lib/nom_ff_n40C_1v95/I2C__nom_ff_n40C_1v95.lib"
-      }
-    },
     "RAM16": {
       "instances": {
         "debugger.core.datapath.ram.bank0": {

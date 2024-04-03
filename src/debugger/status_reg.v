@@ -28,29 +28,36 @@ module status_reg(
         debug_request <= debug_request ^ PWDATA[0];
     end
 
-  reg [1:0] reset_request;
-  always @(posedge PCLK)
-    begin
-      if (~PRESETn)
-        reset_request <= 2'b00;
-      else if (PSEL & PENABLE & ~previous_enable & PWRITE & PWDATA[2])
-        reset_request <= 2'b11;
-      else if (RESET_REQUEST)
-        reset_request <= reset_request - 1;
-    end
-  assign RESET_REQUEST = reset_request != 2'b00;
+  localparam COUNTER_MODE_RESET = 1'b0;
+  localparam COUNTER_MODE_STEP  = 1'b1;
 
-  reg [2:0] stepping;
-  wire allow_debug_req = stepping == 2'b0;
+  reg counter_mode;
+  reg [2:0] counter;
   always @(posedge PCLK)
     begin
       if (~PRESETn)
-        stepping <= 2'b0;
+        begin
+          counter      <= 3'b0;
+          counter_mode <= COUNTER_MODE_RESET;
+        end
+      else if (PSEL & PENABLE & ~previous_enable & PWRITE & PWDATA[2])
+        begin
+          counter_mode <= COUNTER_MODE_RESET;
+          counter      <= 3'b111;
+        end
       else if (PSEL & PENABLE & ~previous_enable & PWRITE & PWDATA[4])
-        stepping <= 3'b111;
-      else if (stepping != 2'b0)
-        stepping <= stepping - 1;
+        begin
+          counter_mode <= COUNTER_MODE_STEP;
+          counter      <= 3'b111;
+        end
+      else if (counter != 3'b0)
+        begin
+          counter <= counter - 1;
+        end
     end
+
+  assign RESET_REQUEST =  counter != 3'b000 && counter_mode == COUNTER_MODE_RESET;
+  wire allow_debug_req = !(counter != 3'b000 && counter_mode == COUNTER_MODE_STEP);
 
   reg previous_enable;
   always @(posedge PCLK)

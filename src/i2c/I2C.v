@@ -1,4 +1,4 @@
-/// sta-blackbox
+/// -- sta-blackbox
 
 `define default_netname none
 `timescale 1ns/1ps
@@ -8,11 +8,9 @@ module I2C(
     input wire        VPWR,
     input wire        VGND,
 `endif
-    input  wire [7:0] ui_in,    // Dedicated inputs
-    output wire [7:0] uo_out,   // Dedicated outputs
-    input  wire [7:0] uio_in,   // IOs: Input path
-    output wire [7:0] uio_out,  // IOs: Output path
-    output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
+    input  wire [3:2] uio_in,   // IOs: Input path
+    output wire [3:2] uio_out,  // IOs: Output path
+    output wire [3:2] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
     input  wire       rst_n,    // reset_n - low to reset
@@ -73,11 +71,5 @@ module I2C(
   assign uio_out[3] = sda_o;
   assign uio_oe[2]  = ~scl_t;
   assign uio_oe[3]  = ~sda_t;
-
-  assign uio_out[1:0] = 2'b0;
-  assign uio_out[7:4] = 4'b0;
-  assign uio_oe[1:0]  = 2'b0;
-  assign uio_oe[7:4]  = 4'b0;
-  assign uo_out       = 8'b0;
 
 endmodule
