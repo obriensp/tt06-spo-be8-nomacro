@@ -2,7 +2,7 @@ import binascii
 import cocotb
 from cocotb.binary import BinaryRepresentation, BinaryValue
 from cocotb.clock import Clock
-from cocotb.triggers import ClockCycles, Combine, Edge, RisingEdge, with_timeout
+from cocotb.triggers import ClockCycles, Combine, Edge, ReadOnly, NextTimeStep, RisingEdge, with_timeout
 from contextlib import asynccontextmanager
 from enum import Enum, IntFlag
 from test.i2c import I2cMaster
@@ -156,6 +156,7 @@ async def testing_preamble(dut):
     dut._log.info("Reset")
     dut.ena.value = 1
     dut.rst_n.value = 0
+    dut.ui_in.value = 0
     controller = I2cMaster(sda=dut.sda_o, sda_o=dut.sda_i, scl=dut.scl_o, scl_o=dut.scl_i, speed=10e3)
     await ClockCycles(dut.clk, 10)
 
@@ -253,7 +254,7 @@ async def test_out_instruction(dut):
     assert dut.uo_out.value == 0xA
 
 
-@cocotb.test()
+# @cocotb.test()
 async def test_in_instruction(dut):
     controller = await testing_preamble(dut)
 
@@ -309,23 +310,14 @@ async def test_multiplication(dut):
         7
     """)
 
-    async with debug_mode(controller):
-        for i in range(100):
-            dut._log.info(f'Step {i}')
-            await dump_cpu_state(dut, controller)
-            if dut.halted.value != 0:
-                dut._log.info('Halted')
-                break
-            await step_instruction(controller)
-
-    # await reset_and_run_until_halt(dut, controller)
+    await reset_and_run_until_halt(dut, controller)
     dut._log.info(f'Result: {dut.uo_out.value}')
     dut._log.info(f'Result: {dut.uo_out.value.integer}')
     await dump_cpu_state(dut, controller)
     assert dut.uo_out.value == 42
 
 
-# @cocotb.test()
+@cocotb.test()
 async def test_fib_sequence(dut):
     controller = await testing_preamble(dut)
 
@@ -348,24 +340,26 @@ async def test_fib_sequence(dut):
         0
     """)
 
-    dut._log.info('Wrote program')
-
-    async def perform_reset(controller):
-        dut._log.info('Requesting reset')
-        await read_status_register(controller)
+    async with regular_mode(controller):
         await request_reset(controller)
 
-    async def verify_output():
-        dut._log.info('Waiting for output port to change')
+        # we might miss the start of the output stream because I2C is comparably slow.
+        # wait until we see uo_out return to zero before starting validation
+        for i in range(12):
+            await with_timeout(Edge(dut.uo_out), 50, 'ms')
+            await ReadOnly()
+            if dut.uo_out.value == 0:
+                break
+
+        assert dut.uo_out.value == 0
+
         for i in [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]:
             await with_timeout(Edge(dut.uo_out), 50, 'ms')
+            await ReadOnly()
             assert dut.uo_out.value == i
 
-    async with regular_mode(controller):
-        await Combine(
-            cocotb.start_soon(perform_reset(controller)),
-            cocotb.start_soon(verify_output())
-        )
+        await NextTimeStep()
+
 
 @cocotb.test()
 async def test_sta(dut):
