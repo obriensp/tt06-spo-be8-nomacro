@@ -14,7 +14,7 @@ jobs:
           submodules: recursive
 
       - name: Build GDS
-        uses: obriensp/tt-gds-action@tt06-openlane2-antenna-fix
+        uses: obriensp/tt-gds-action@spo/tt06-openlane2-antenna-fix
         with:
           openlane-tag: spo/openroad-antenna-fix
 
