@@ -8,13 +8,11 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-import argparse
 import json
 import os
 from typing import List
 
 from openlane.common import get_opdks_rev
-from openlane.flows.misc import OpenInKLayout
 from openlane.flows.classic import Classic
 from openlane.steps.odb import OdbpyStep
 from openlane.steps import OpenROAD
@@ -22,56 +20,47 @@ import volare
 
 class CustomPower(OdbpyStep):
 
-	id = "TT.Top.CustomPower"
-	name = "Custom Power connections for DFFRAM macro"
+    id = "TT.Top.CustomPower"
+    name = "Custom Power connections for DFFRAM macro"
 
-	def get_script_path(self):
-		return os.path.join(
-			os.path.dirname(__file__),
-			"odb_power.py"
-		)
+    def get_script_path(self):
+        return os.path.join(
+            os.path.dirname(__file__),
+            "odb_power.py"
+        )
 
-	def get_command(self) -> List[str]:
-		# macro = self.config["MACROS"]['I2C']
-		# instance = macro.instances['i2c']
-		macro = self.config["MACROS"]['RAM16']
-		instance = macro.instances['debugger.core.datapath.ram.bank0']
-		return super().get_command() + [
-			"--macro-x-pos",
-			instance.location[0],
-		]
+    def get_command(self) -> List[str]:
+        # macro = self.config["MACROS"]['I2C']
+        # instance = macro.instances['i2c']
+        macro = self.config["MACROS"]['RAM16']
+        instance = macro.instances['debugger.core.datapath.ram.bank0']
+        return super().get_command() + [
+            "--macro-x-pos",
+            instance.location[0],
+        ]
 
 
 class ProjectFlow(Classic):
   pass
 
 if __name__ == '__main__':
-	# Argument processing
-	parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-	parser.add_argument("--open-in-klayout", action="store_true", help="Open last run in KLayout")
+    # Insert our custom step after the PDN generation
+    ProjectFlow.Steps.insert(ProjectFlow.Steps.index(OpenROAD.GeneratePDN) + 1, CustomPower)
 
-  # Insert our custom step after the PDN generation
-	ProjectFlow.Steps.insert(ProjectFlow.Steps.index(OpenROAD.GeneratePDN) + 1, CustomPower)
+    # Temporarily disable antenna repair to avoid a segfault in openroad
+    ProjectFlow.Steps.remove(OpenROAD.RepairAntennas)
 
-	# Temporarily disable antenna repair to avoid a segfault in openroad
-	ProjectFlow.Steps.remove(OpenROAD.RepairAntennas)
+    pdk_root = volare.get_volare_home(os.getenv('PDK_ROOT'))
+    volare.enable(pdk_root, "sky130", get_opdks_rev())
 
-	args = parser.parse_args()
-	config = vars(args)
+    flow_cfg = json.loads(open('config.json', 'r').read())
 
-	pdk_root =  volare.get_volare_home(os.getenv('PDK_ROOT'))
-	volare.enable(pdk_root, "sky130", get_opdks_rev())
+    # Run flow
+    flow = ProjectFlow(
+        flow_cfg,
+        design_dir = ".",
+        pdk_root   = pdk_root,
+        pdk        = "sky130A",
+    )
 
-	# Load fixed required config for UPW
-	flow_cfg = json.loads(open('config.json', 'r').read())
-
-	# Run flow
-	flow_class = OpenInKLayout if args.open_in_klayout else ProjectFlow
-	flow = flow_class(
-		flow_cfg,
-		design_dir = ".",
-		pdk_root   = pdk_root,
-		pdk        = "sky130A",
-	)
-
-	flow.start(tag = "wokwi")
+    flow.start(tag="wokwi")
