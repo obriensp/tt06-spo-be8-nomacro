@@ -48,7 +48,7 @@ if __name__ == '__main__':
     ProjectFlow.Steps.insert(ProjectFlow.Steps.index(OpenROAD.GeneratePDN) + 1, CustomPower)
 
     # Temporarily disable antenna repair to avoid a segfault in openroad
-    ProjectFlow.Steps.remove(OpenROAD.RepairAntennas)
+    # ProjectFlow.Steps.remove(OpenROAD.RepairAntennas)
 
     pdk_root = volare.get_volare_home(os.getenv('PDK_ROOT'))
     volare.enable(pdk_root, "sky130", get_opdks_rev())
