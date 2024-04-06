@@ -17,6 +17,7 @@ jobs:
         uses: obriensp/tt-gds-action@spo/tt06-openlane2-antenna-fix
         with:
           openlane-tag: spo/openroad-antenna-fix
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   precheck:
     needs: gds
