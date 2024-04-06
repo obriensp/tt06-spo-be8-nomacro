@@ -14,9 +14,9 @@ jobs:
           submodules: recursive
 
       - name: Build GDS
-        uses: TinyTapeout/tt-gds-action@tt06-openlane2
+        uses: obriensp/tt-gds-action@tt06-openlane2-antenna-fix
         with:
-          openlane-tag: 2.0.0b17
+          openlane-tag: spo/openroad-antenna-fix
 
   precheck:
     needs: gds
