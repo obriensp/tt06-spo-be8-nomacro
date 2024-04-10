@@ -45,7 +45,7 @@ class ProjectFlow(Classic):
 
 if __name__ == '__main__':
     # Insert our custom step after the PDN generation
-    ProjectFlow.Steps.insert(ProjectFlow.Steps.index(OpenROAD.GeneratePDN) + 1, CustomPower)
+    # ProjectFlow.Steps.insert(ProjectFlow.Steps.index(OpenROAD.GeneratePDN) + 1, CustomPower)
 
     # Temporarily disable antenna repair to avoid a segfault in openroad
     # ProjectFlow.Steps.remove(OpenROAD.RepairAntennas)

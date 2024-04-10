@@ -1,21 +1,14 @@
 {
   "DESIGN_NAME": "tt_um_obriensp_be8",
-  "VERILOG_FILES": ["src/tt_top.v", "src/cpu/alu.v", "src/cpu/bus_mux.v", "src/cpu/control.v", "src/cpu/core.v", "src/debugger/cpu_access.v", "src/cpu/datapath.v", "src/debugger/debugger_apb.v", "src/debugger/debugger_microcode.v", "src/cpu/full_adder.v", "src/i2c/i2c_slave.v", "src/i2c/i2c_to_apb.v", "src/cpu/microcode.v", "src/cpu/pc.v", "src/cpu/ram.v", "src/cpu/register.v", "src/cpu/register4.v", "src/debugger/status_reg.v", "src/i2c/I2C.v"],
-  "EXTRA_VERILOG_MODELS": ["src/cpu/RAM8.v", "src/cpu/RAM16.v"],
+  "VERILOG_FILES": ["src/tt_top.v", "src/cpu/alu.v", "src/cpu/bus_mux.v", "src/cpu/control.v", "src/cpu/core.v", "src/debugger/cpu_access.v", "src/cpu/datapath.v", "src/debugger/debugger_apb.v", "src/debugger/debugger_microcode.v", "src/cpu/full_adder.v", "src/i2c/i2c_slave.v", "src/i2c/i2c_to_apb.v", "src/cpu/microcode.v", "src/cpu/pc.v", "src/cpu/ram.v", "src/cpu/RAM16.v", "src/cpu/register.v", "src/cpu/register4.v", "src/debugger/status_reg.v", "src/i2c/I2C.v"],
 
   "FP_PDN_CHECK_NODES": false,
   "FP_PDN_CFG": "pdn_cfg.tcl",
-  "FP_PDN_VPITCH": 51.2,
-  "FP_PDN_HORIZONTAL_HALO": 0,
-  "FP_PDN_VERTICAL_HALO": 0,
-  "FP_MACRO_VERTICAL_HALO": 0.1,
-  "FP_MACRO_HORIZONTAL_HALO": 1.4,
   "MAGIC_LEF_WRITE_USE_GDS": true,
 
 
   "GRT_ALLOW_CONGESTION": true,
 
-  "//PL_TARGET_DENSITY": 0.94,
   "GRT_ANTENNA_MARGIN": 15,
   "RUN_HEURISTIC_DIODE_INSERTION": true,
   "DESIGN_REPAIR_MAX_WIRE_LENGTH": 800,
@@ -24,39 +17,9 @@
   "DESIGN_REPAIR_BUFFER_INPUT_PORTS": false,
   "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": false,
 
-  "MACROS": {
-    "RAM16": {
-      "instances": {
-        "debugger.core.datapath.ram.bank0": {
-          "location": [2.76, 2.72],
-          "orientation": "N"
-        }
-      },
-      "gds": ["dir::macros/RAM16/RAM16.gds"],
-      "lef": ["dir::macros/RAM16/RAM16.lef"],
-      "nl": ["dir::macros/RAM16/RAM16.nl.v"],
-      "spef": {
-        "min_*": ["dir::macros/RAM16/RAM16.min.spef"],
-        "nom_*": ["dir::macros/RAM16/RAM16.nom.spef"],
-        "max_*": ["dir::macros/RAM16/RAM16.max.spef"]
-      },
-      "lib": {
-        "min_tt_025C_1v80": "dir::macros/RAM16/lib/min_tt_025C_1v80/RAM16__min_tt_025C_1v80.lib",
-        "min_ff_n40C_1v95": "dir::macros/RAM16/lib/min_ff_n40C_1v95/RAM16__min_ff_n40C_1v95.lib",
-        "max_ff_n40C_1v95": "dir::macros/RAM16/lib/max_ff_n40C_1v95/RAM16__max_ff_n40C_1v95.lib",
-        "nom_tt_025C_1v80": "dir::macros/RAM16/lib/nom_tt_025C_1v80/RAM16__nom_tt_025C_1v80.lib",
-        "min_ss_100C_1v60": "dir::macros/RAM16/lib/min_ss_100C_1v60/RAM16__min_ss_100C_1v60.lib",
-        "max_ss_100C_1v60": "dir::macros/RAM16/lib/max_ss_100C_1v60/RAM16__max_ss_100C_1v60.lib",
-        "max_tt_025C_1v80": "dir::macros/RAM16/lib/max_tt_025C_1v80/RAM16__max_tt_025C_1v80.lib",
-        "nom_ss_100C_1v60": "dir::macros/RAM16/lib/nom_ss_100C_1v60/RAM16__nom_ss_100C_1v60.lib",
-        "nom_ff_n40C_1v95": "dir::macros/RAM16/lib/nom_ff_n40C_1v95/RAM16__nom_ff_n40C_1v95.lib"
-      }
-    }
-  },
-
   "FP_SIZING": "absolute",
-  "DIE_AREA": [0, 0, 161.00, 111.52],
-  "FP_DEF_TEMPLATE": "dir::tt/def/tt_block_1x1_pg.def",
+  "DIE_AREA": [0, 0, 161.00, 225.76],
+  "FP_DEF_TEMPLATE": "dir::tt/def/tt_block_1x2_pg.def",
 
   "//": "use alternative efabless decap cells to solve LI density issue",
   "DECAP_CELL": [
