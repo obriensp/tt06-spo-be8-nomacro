@@ -62,8 +62,16 @@ module I2C(
     .PREADY(PREADY)
   );
 
+  reg reset_reg;
+  always @(posedge clk)
+    begin
+      reset_reg <= rst_n;
+    end
+
   assign PCLK    = clk;
-  assign PRESETn = rst_n;
+
+  // reset with async assertion, sync deassertion
+  assign PRESETn = reset_reg & rst_n;
 
   assign scl_i = uio_in[2];
   assign sda_i = uio_in[3];

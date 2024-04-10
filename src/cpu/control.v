@@ -5,6 +5,8 @@ module control(
   input wire CLK,
   input wire RESETn,
 
+  input wire RUN,
+
   input wire [3:0] OPCODE,
   input wire CF,
   input wire ZF,
@@ -27,6 +29,8 @@ module control(
   always @(negedge CLK or negedge RESETn)
     begin
       if (~RESETn)
+        counter <= 3'b111;
+      else if (~RUN)
         counter <= 3'b111;
       else
         if (reset_counter)

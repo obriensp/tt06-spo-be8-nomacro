@@ -117,6 +117,18 @@ module debugger_apb(
 //     .PREADY3(1'b1)
   );
 
+  // Register the reset request signal to hopefully prevent glitches on the core's reset line
+  reg reset_request_bufn;
+  always @(posedge PCLK)
+    begin
+      if (~PRESETn)
+        reset_request_bufn <= 1'b1;
+      else if (~reset_request)
+        reset_request_bufn <= 1'b1;
+      else
+        reset_request_bufn <= 1'b0;
+    end
+
   wire       DEBUG_REQUEST;
   wire       DEBUG_ACK;
   wire [7:0] DEBUG_DATA;
@@ -130,7 +142,7 @@ module debugger_apb(
     .VGND(VGND),
 `endif
     .CLK(PCLK),
-    .RESETn(PRESETn & ~reset_request),
+    .RESETn(PRESETn & reset_request_bufn),
     .DEBUG_REQUEST(DEBUG_REQUEST),
     .DEBUG_ACK(DEBUG_ACK),
     .DEBUG_DATA(DEBUG_DATA),

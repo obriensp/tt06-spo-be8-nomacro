@@ -50,14 +50,16 @@ module core(
 
   assign DEBUG_ACK = debug;
 
-  wire C_RESETn;
+  wire C_RUN;
   wire C_CLR, C_HLT, C_CE, C_SU;
   wire C_AIn, C_BIn, C_OIn, C_IIn, C_Jn, C_FIn, C_MIn, C_RI;
   wire C_AOn, C_BOn, C_IOn, C_COn, C_EOn, C_ROn, C_NOn;
   wire C_T0;
   control control(
     .CLK(CLK),
-    .RESETn(C_RESETn),
+    .RESETn(RESETn),
+
+    .RUN(C_RUN),
 
     .OPCODE(OPCODE),
     .CF(CF),
@@ -70,8 +72,8 @@ module core(
     .T0(C_T0)
   );
 
-  // Reset the control module if we're halted or if the debugger is enabled
-  assign C_RESETn = RESETn & ~debug & ~halt;
+  // Don't run the control module if we're halted or if the debugger is enabled
+  assign C_RUN = ~debug & ~halt;
 
   wire CLR, HLT, CE, SU;
   wire AIn, BIn, OIn, IIn, Jn, FIn, MIn, RI;
