@@ -6,7 +6,7 @@
 `default_nettype none
 `timescale 1ns/1ps
 
-module tt_um_obriensp_be8(
+module tt_um_obriensp_be8_nomacro(
 `ifdef USE_POWER_PINS
     input wire        VPWR,
     input wire        VGND,

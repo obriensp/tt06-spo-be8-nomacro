@@ -1,5 +1,5 @@
 {
-  "DESIGN_NAME": "tt_um_obriensp_be8",
+  "DESIGN_NAME": "tt_um_obriensp_be8_nomacro",
   "VERILOG_FILES": ["src/tt_top.v", "src/cpu/alu.v", "src/cpu/bus_mux.v", "src/cpu/control.v", "src/cpu/core.v", "src/debugger/cpu_access.v", "src/cpu/datapath.v", "src/debugger/debugger_apb.v", "src/debugger/debugger_microcode.v", "src/cpu/full_adder.v", "src/i2c/i2c_slave.v", "src/i2c/i2c_to_apb.v", "src/cpu/microcode.v", "src/cpu/pc.v", "src/cpu/ram.v", "src/cpu/RAM16.v", "src/cpu/register.v", "src/cpu/register4.v", "src/debugger/status_reg.v", "src/i2c/I2C.v"],
 
   "FP_PDN_CHECK_NODES": false,
