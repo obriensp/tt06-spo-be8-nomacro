@@ -5,7 +5,7 @@
   "FP_PDN_CHECK_NODES": false,
   "FP_PDN_CFG": "pdn_cfg.tcl",
   "MAGIC_LEF_WRITE_USE_GDS": true,
-
+  "MAGIC_WRITE_LEF_PINONLY": true,
 
   "GRT_ALLOW_CONGESTION": true,
 
